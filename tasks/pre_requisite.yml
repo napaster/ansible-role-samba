@@ -1,0 +1,47 @@
+---
+- name: samba | Add the OS specific variables
+  include_vars: "{{ hostvars[inventory_hostname]['ansible_os_family'] +
+                    '.yml' }}"
+- name: samba | Set facts about samba role
+  set_fact:
+    samba_mode: "{{ hostvars[inventory_hostname]['samba'] |
+      json_query('[].mode[] | [0]') }}"
+    samba_smb_global_settings: "{{ hostvars[inventory_hostname]['samba'] |
+      json_query('[].smb[].global[]') }}"
+    samba_smb_shares_settings: "{{ hostvars[inventory_hostname]['samba'] |
+      json_query('[].smb[].shares[]') }}"
+    samba_ctdb_settings: "{{ hostvars[inventory_hostname]['samba'] |
+      json_query('[].ctdb[].settings[]') }}"
+    samba_ctdb_private_address: "{{ hostvars[inventory_hostname]['samba'] |
+      json_query('[].ctdb[].private_address[]') }}"
+    samba_ctdb_public_address: "{{ hostvars[inventory_hostname]['samba'] |
+      json_query('[].ctdb[].public_address[]') }}"
+    samba_ctdb_script_options: "{{ hostvars[inventory_hostname]['samba'] |
+      json_query('[].ctdb[].script_options[]') }}"
+- name: samba | Assert samba mode
+  assert:
+    that:
+    - "vars['samba_mode'] is defined"
+    - "vars['samba_mode'] in ['standalone', 'cluster']"
+    msg: "Samba mode not in ['standalone', 'cluster'] or not defined."
+    quiet: "true"
+- name: samba | Assert that system manager is systemd
+  assert:
+    that:
+    - "hostvars[inventory_hostname]['ansible_service_mgr'] == 'systemd'"
+    msg: "System manager is not systemd."
+    quiet: "true"
+- name: samba | Create samba catalog
+  file:
+    path: "{{ hostvars[inventory_hostname]['samba_smb_conf_dest'] }}"
+    state: "directory"
+    owner: "root"
+    group: "root"
+    mode: "0755"
+- name: samba | Create ctdb catalog
+  file:
+    path: "/etc/ctdb"
+    state: "directory"
+    owner: "root"
+    group: "root"
+    mode: "0755"

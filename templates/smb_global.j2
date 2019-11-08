@@ -1,0 +1,1187 @@
+{{ '[global]' }}
+{% if g.abort_shutdown_script is defined and g.abort_shutdown_script != '' %}
+{{ '  abort shutdown script = ' + g.abort_shutdown_script }}
+{% endif %}
+{% if g.add_machine_script is defined and g.add_machine_script != '' %}
+{{ '  add machine script = ' + g.add_machine_script }}
+{% endif %}
+{% if g.addport_command is defined and g.addport_command != '' %}
+{{ '  addport command = ' + g.add_machine_script }}
+{% endif %}
+{% if g.addprinter_command is defined and g.addprinter_command != '' %}
+{{ '  addprinter command = ' + g.addprinter_command }}
+{% endif %}
+{% if g.add_share_command is defined and g.add_share_command != '' %}
+{{ '  add share command = ' + g.add_share_command }}
+{% endif %}
+{% if g.add_user_script is defined and g.add_user_script != '' %}
+{{ '  add user script = ' + g.add_user_script }}
+{% endif %}
+{% if g.add_user_to_group_script is defined and
+      g.add_user_to_group_script != '' %}
+{{ '  add user to group script = ' + g.add_user_to_group_script }}
+{% endif %}
+{% if g.afs_token_lifetime is defined and g.afs_token_lifetime != '' %}
+{{ '  afs token lifetime = ' ~ g.afs_token_lifetime }}
+{% endif %}
+{% if g.afs_username_map is defined and g.afs_username_map != '' %}
+{{ '  afs username map = ' + g.afs_username_map }}
+{% endif %}
+{% if g.aio_max_threads is defined and g.aio_max_threads != '' %}
+{{ '  aio max threads = ' ~ g.aio_max_threads }}
+{% endif %}
+{% if g.algorithmic_rid_base is defined and g.algorithmic_rid_base != '' %}
+{{ '  algorithmic rid base = ' ~ g.algorithmic_rid_base }}
+{% endif %}
+{% if g.allow_dcerpc_auth_level_connect is defined and
+      g.allow_dcerpc_auth_level_connect in ['yes', 'no'] %}
+{{ '  allow dcerpc auth level connect = ' + g.allow_dcerpc_auth_level_connect }}
+{% endif %}
+{% if g.allow_dns_updates is defined and
+      g.allow_dns_updates in ['disabled', 'nonsecure', 'secure only'] %}
+{{ '  allow dns updates = ' + g.allow_dns_updates }}
+{% endif %}
+{% if g.allow_insecure_wide_links is defined and
+      g.allow_insecure_wide_links in ['yes', 'no'] %}
+{{ '  allow insecure wide links = ' + g.allow_insecure_wide_links }}
+{% endif %}
+{% if g.allow_nt4_crypto is defined and
+      g.allow_nt4_crypto in ['yes', 'no'] %}
+{{ '  allow nt4 crypto = ' + g.allow_nt4_crypto }}
+{% endif %}
+{% if g.allow_trusted_domains is defined and
+      g.allow_trusted_domains in ['yes', 'no'] %}
+{{ '  allow trusted domains = ' + g.allow_trusted_domains }}
+{% endif %}
+{% if g.allow_unsafe_cluster_upgrade is defined and
+      g.allow_unsafe_cluster_upgrade in ['yes', 'no'] %}
+{{ '  allow unsafe cluster upgrade = ' + g.allow_unsafe_cluster_upgrade }}
+{% endif %}
+{% if g.apply_group_policies is defined and
+      g.apply_group_policies in ['yes', 'no'] %}
+{{ '  apply group policies = ' + g.apply_group_policies }}
+{% endif %}
+{% if g.async_smb_echo_handler is defined and
+      g.async_smb_echo_handler in ['yes', 'no'] %}
+{{ '  async smb echo handler = ' + g.async_smb_echo_handler }}
+{% endif %}
+{% if g.auth_event_notification is defined and
+      g.auth_event_notification in ['yes', 'no'] %}
+{{ '  auth event notification = ' + g.auth_event_notification }}
+{% endif %}
+{% if g.auto_services is defined and g.auto_services != '' %}
+{% if g.auto_services is string %}
+{{ '  auto services = ' + g.auto_services }}
+{% elif g.auto_services is sequence %}
+{{ '  auto services = ' + g.auto_services | join(' ') }}
+{% endif %}
+{% endif %}
+{% if g.available is defined and g.available in ['yes', 'no'] %}
+{{ '  available = ' + g.available }}
+{% endif %}
+{% if g.binddns_dir is defined and g.binddns_dir != '' %}
+{{ '  binddns dir = ' + g.binddns_dir }}
+{% endif %}
+{% if g.bind_interfaces_only is defined and
+      g.bind_interfaces_only in ['yes', 'no'] %}
+{{ '  bind interfaces only = ' + g.bind_interfaces_only }}
+{% endif %}
+{% if g.browse_list is defined and g.browse_list in ['yes', 'no'] %}
+{{ '  browse list = ' + g.browse_list }}
+{% endif %}
+{% if g.cache_directory is defined and g.cache_directory != '' %}
+{{ '  cache directory = ' + g.cache_directory }}
+{% endif %}
+{% if g.change_notify is defined and g.change_notify in ['yes', 'no'] %}
+{{ '  change notify = ' + g.change_notify }}
+{% endif %}
+{% if g.change_share_command is defined and g.change_share_command != '' %}
+{{ '  change share command = ' + g.change_share_command }}
+{% endif %}
+{% if g.check_password_script is defined and g.check_password_script != '' %}
+{{ '  check password script = ' + g.check_password_script }}
+{% endif %}
+{% if g.cldap_port is defined and g.cldap_port != '' %}
+{{ '  cldap port = ' ~ g.cldap_port }}
+{% endif %}
+{% if g.client_ipc_max_protocol is defined and
+      g.client_ipc_max_protocol != '' %}
+{{ '  client ipc max protocol = ' + g.client_ipc_max_protocol }}
+{% endif %}
+{% if g.client_ipc_min_protocol is defined and
+      g.client_ipc_min_protocol != '' %}
+{{ '  client ipc min protocol = ' + g.client_ipc_min_protocol }}
+{% endif %}
+{% if g.client_ipc_signing is defined and g.client_ipc_signing != '' %}
+{{ '  client ipc signing = ' + g.client_ipc_signing }}
+{% endif %}
+{% if g.client_lanman_auth is defined and
+      g.client_lanman_auth in ['yes', 'no'] %}
+{{ '  client lanman auth = ' + g.client_lanman_auth }}
+{% endif %}
+{% if g.client_ldap_sasl_wrapping is defined and
+      g.client_ldap_sasl_wrapping in ['plain', 'sign', 'seal'] %}
+{{ '  client ldap sasl wrapping = ' + g.client_ldap_sasl_wrapping }}
+{% endif %}
+{% if g.client_max_protocol is defined and g.client_max_protocol != '' %}
+{{ '  client max protocol = ' + g.client_max_protocol }}
+{% endif %}
+{% if g.client_min_protocol is defined and g.client_min_protocol != '' %}
+{{ '  client min protocol = ' + g.client_min_protocol }}
+{% endif %}
+{% if g.client_ntlmv2_auth is defined and
+      g.client_ntlmv2_auth in ['yes', 'no'] %}
+{{ '  client NTLMv2 auth = ' + g.client_ntlmv2_auth }}
+{% endif %}
+{% if g.client_plaintext_auth is defined and
+      g.client_plaintext_auth in ['yes', 'no'] %}
+{{ '  client plaintext auth = ' + g.client_plaintext_auth }}
+{% endif %}
+{% if g.client_signing is defined and g.client_signing != '' %}
+{{ '  client signing = ' + g.client_signing }}
+{% endif %}
+{% if g.cluster_addresses is defined and g.cluster_addresses != '' %}
+{% if g.cluster_addresses is string %}
+{{ '  cluster addresses = ' + g.cluster_addresses }}
+{% elif g.auto_services is sequence %}
+{{ '  cluster addresses = ' + g.cluster_addresses | join(' ') }}
+{% endif %}
+{% endif %}
+{% if g.clustering is defined and g.clustering in ['yes', 'no'] %}
+{{ '  clustering = ' + g.clustering }}
+{% endif %}
+{% if g.comment is defined and g.comment != '' %}
+{{ '  comment = ' + g.comment }}
+{% endif %}
+{% if g.config_backend is defined and
+      g.config_backend in ['file', 'registry'] %}
+{{ '  config backend = ' + g.config_backend }}
+{% endif %}
+{% if g.create_krb5_conf is defined and g.create_krb5_conf in ['yes', 'no'] %}
+{{ '  create krb5 conf = ' + g.create_krb5_conf }}
+{% endif %}
+{% if g.ctdbd_socket is defined and
+      g.ctdbd_socket != '' %}
+{{ '  ctdbd socket = ' + g.ctdbd_socket }}
+{% endif %}
+{% if g.ctdb_locktime_warn_threshold is defined and
+      g.ctdb_locktime_warn_threshold != '' %}
+{{ '  ctdb locktime warn threshold = ' ~ g.ctdb_locktime_warn_threshold }}
+{% endif %}
+{% if g.ctdb_timeout is defined and g.ctdb_timeout != '' %}
+{{ '  ctdb timeout = ' ~ g.ctdb_timeout }}
+{% endif %}
+{% if g.cups_connection_timeout is defined and
+      g.cups_connection_timeout != '' %}
+{{ '  cups connection timeout = ' ~ g.cups_connection_timeout }}
+{% endif %}
+{% if g.cups_encrypt is defined and g.cups_encrypt in ['yes', 'no'] %}
+{{ '  cups encrypt = ' + g.cups_encrypt }}
+{% endif %}
+{% if g.cups_server is defined and g.cups_server != '' %}
+{{ '  cups server = ' ~ g.cups_server }}
+{% endif %}
+{% if g.dcerpc_endpoint_servers is defined and g.dcerpc_endpoint_servers != '' %}
+{% if g.dcerpc_endpoint_servers is string %}
+{{ '  dcerpc endpoint servers = ' + g.dcerpc_endpoint_servers }}
+{% elif g.auto_services is sequence %}
+{{ '  dcerpc endpoint servers = ' + g.dcerpc_endpoint_servers | join(', ') }}
+{% endif %}
+{% endif %}
+{% if g.deadtime is defined and g.deadtime != '' %}
+{{ '  deadtime = ' ~ g.deadtime }}
+{% endif %}
+{% if g.debug_class is defined and g.debug_class in ['yes', 'no'] %}
+{{ '  debug class = ' + g.debug_class }}
+{% endif %}
+{% if g.debug_hires_timestamp is defined and
+      g.debug_hires_timestamp in ['yes', 'no'] %}
+{{ '  debug hires timestamp = ' + g.debug_hires_timestamp }}
+{% endif %}
+{% if g.debug_pid is defined and g.debug_pid in ['yes', 'no'] %}
+{{ '  debug pid = ' + g.debug_pid }}
+{% endif %}
+{% if g.debug_prefix_timestamp is defined and
+      g.debug_prefix_timestamp in ['yes', 'no'] %}
+{{ '  debug prefix timestamp = ' + g.debug_prefix_timestamp }}
+{% endif %}
+{% if g.debug_uid is defined and g.debug_uid in ['yes', 'no'] %}
+{{ '  debug uid = ' + g.debug_uid }}
+{% endif %}
+{% if g.dedicated_keytab_file is defined and g.dedicated_keytab_file != '' %}
+{{ '  dedicated keytab file = ' + g.dedicated_keytab_file }}
+{% endif %}
+{% if g.default_service is defined and g.default_service != '' %}
+{{ '  default service = ' + g.default_service }}
+{% endif %}
+{% if g.defer_sharing_violations is defined and
+      g.defer_sharing_violations in ['yes', 'no'] %}
+{{ '  defer sharing violations = ' + g.defer_sharing_violations }}
+{% endif %}
+{% if g.delete_group_script is defined and g.delete_group_script != '' %}
+{{ '  delete group script = ' + g.delete_group_script }}
+{% endif %}
+{% if g.delete_printer_command is defined and g.delete_printer_command != '' %}
+{{ '  deleteprinter command = ' + g.delete_printer_command }}
+{% endif %}
+{% if g.delete_share_command is defined and g.delete_share_command != '' %}
+{{ '  delete share command = ' + g.delete_share_command }}
+{% endif %}
+{% if g.delete_user_from_group_script is defined and
+      g.delete_user_from_group_script != '' %}
+{{ '  delete user from group script = ' + g.delete_user_from_group_script }}
+{% endif %}
+{% if g.delete_user_script is defined and g.delete_user_script != '' %}
+{{ '  delete user script = ' + g.delete_user_script }}
+{% endif %}
+{% if g.dgram_port is defined and g.dgram_port != '' %}
+{{ '  dgram port = ' ~ g.dgram_port }}
+{% endif %}
+{% if g.disable_netbios is defined and g.disable_netbios in ['yes', 'no'] %}
+{{ '  disable netbios = ' + g.disable_netbios }}
+{% endif %}
+{% if g.dns_forwarder is defined and g.dns_forwarder | ipaddr('host') %}
+{{ '  dns forwarder = ' + g.dns_forwarder }}
+{% endif %}
+{% if g.dns_proxy is defined and g.dns_proxy in ['yes', 'no'] %}
+{{ '  dns proxy = ' + g.dns_proxy }}
+{% endif %}
+{% if g.dns_update_command is defined and
+      g.dns_update_command != '' %}
+{{ '  dns update command = ' + g.dns_update_command }}
+{% endif %}
+{% if g.dns_update_command is defined and g.dns_update_command != '' %}
+{{ '  dns update command = ' + g.dns_update_command }}
+{% endif %}
+{% if g.dns_zone_scavenging is defined and
+      g.dns_zone_scavenging in ['yes', 'no'] %}
+{{ '  dns zone scavenging = ' + g.dns_zone_scavenging }}
+{% endif %}
+{% if g.domain_logons is defined and g.domain_logons in ['yes', 'no'] %}
+{{ '  domain logons = ' + g.domain_logons }}
+{% endif %}
+{% if g.domain_master is defined and g.domain_master in ['yes', 'no', 'auto'] %}
+{{ '  domain master = ' + g.domain_master }}
+{% endif %}
+{% if g.dos_charset is defined and g.dos_charset != '' %}
+{{ '  dos charset = ' + g.dos_charset }}
+{% endif %}
+{% if g.dsdb_event_notification is defined and
+      g.dsdb_event_notification in ['yes', 'no'] %}
+{{ '  dsdb event notification = ' + g.dsdb_event_notification }}
+{% endif %}
+{% if g.dsdb_group_change_notification is defined and
+      g.dsdb_group_change_notification in ['yes', 'no'] %}
+{{ '  dsdb group change notification = ' + g.dsdb_group_change_notification }}
+{% endif %}
+{% if g.dsdb_password_event_notification is defined and
+      g.dsdb_password_event_notification in ['yes', 'no'] %}
+{{ '  dsdb password event notification = ' +
+      g.dsdb_password_event_notification }}
+{% endif %}
+{% if g.enable_asu_support is defined and
+      g.enable_asu_support in ['yes', 'no'] %}
+{{ '  enable asu support = ' + g.enable_asu_support }}
+{% endif %}
+{% if g.enable_core_files is defined and g.enable_core_files in ['yes', 'no'] %}
+{{ '  enable core files = ' + g.enable_core_files }}
+{% endif %}
+{% if g.enable_privileges is defined and g.enable_privileges in ['yes', 'no'] %}
+{{ '  enable privileges = ' + g.enable_privileges }}
+{% endif %}
+{% if g.enable_spoolss is defined and g.enable_spoolss in ['yes', 'no'] %}
+{{ '  enable spoolss = ' + g.enable_spoolss }}
+{% endif %}
+{% if g.encrypt_passwords is defined and g.encrypt_passwords in ['yes', 'no'] %}
+{{ '  encrypt passwords = ' + g.encrypt_passwords }}
+{% endif %}
+{% if g.enhanced_browsing is defined and g.enhanced_browsing in ['yes', 'no'] %}
+{{ '  enhanced browsing = ' + g.enhanced_browsing }}
+{% endif %}
+{% if g.enumports_command is defined and g.enumports_command != '' %}
+{{ '  enumports command = ' + g.enumports_command }}
+{% endif %}
+{% if g.eventlog_list is defined and g.eventlog_list != '' %}
+{% if g.eventlog_list is string %}
+{{ '  eventlog list = ' + g.eventlog_list }}
+{% elif g.auto_services is sequence %}
+{{ '  eventlog list = ' + g.eventlog_list | join(' ') }}
+{% endif %}
+{% endif %}
+{% if g.fss_prune_stale is defined and g.fss_prune_stale in ['yes', 'no'] %}
+{{ '  fss: prune stale = ' + g.fss_prune_stale }}
+{% endif %}
+{% if g.fss_sequence_timeout is defined and g.fss_sequence_timeout != '' %}
+{{ '  fss: sequence timeout = ' ~ g.fss_sequence_timeout }}
+{% endif %}
+{% if g.get_quota_command is defined and g.get_quota_command != '' %}
+{{ '  get quota command = ' + g.get_quota_command }}
+{% endif %}
+{% if g.gpo_update_command is defined and g.gpo_update_command != '' %}
+{{ '  gpo update command = ' + g.gpo_update_command }}
+{% endif %}
+{% if g.guest_account is defined and g.guest_account != '' %}
+{{ '  guest account = ' + g.guest_account }}
+{% endif %}
+{% if g.homedir_map is defined and g.homedir_map != '' %}
+{{ '  homedir map = ' + g.homedir_map }}
+{% endif %}
+{% if g.host_msdfs is defined and g.host_msdfs in ['yes', 'no'] %}
+{{ '  host msdfs = ' + g.host_msdfs }}
+{% endif %}
+{% if g.hostname_lookups is defined and g.hostname_lookups in ['yes', 'no'] %}
+{{ '  hostname lookups = ' + g.hostname_lookups }}
+{% endif %}
+{% if g.idmap_cache_time is defined and g.idmap_cache_time != '' %}
+{{ '  idmap cache time = ' ~ g.idmap_cache_time }}
+{% endif %}
+{% if g.idmap_config is defined and g.idmap_config != '' %}
+{% for gi in g.idmap_config %}
+{% if gi.domain is defined and gi.domain != '' %}
+{% if gi.backend is defined and gi.backend in ['tdb', 'tdb2', 'ldap', 'rid',
+                                              'hash', 'autorid', 'ad', 'nss'] %}
+{{ '  idmap config ' + gi.domain + ' : backend = ' + gi.backend }}
+{% endif %}
+{% if gi.range is defined and gi.range != '' %}
+{% for gir in gi.range %}
+{% if (gir.low is defined and gir.low != '') and
+      (gir.high is defined and gir.high != '') %}
+{{ '  idmap config ' ~ gi.domain ~ ' : range = ' ~ gir.low ~ '-' ~ gir.high }}
+{% endif %}
+{% endfor %}
+{% endif %}
+{% if gi.read_only is defined and gi.read_only in ['yes', 'no'] %}
+{{ '  idmap config ' + gi.domain + ' : read only = ' + gi.read_only }}
+{% endif %}
+{% if gi.rangesize is defined and gi.rangesize != '' %}
+{{ '  idmap config ' ~ gi.domain ~ ' : rangesize = ' ~ gi.rangesize }}
+{% endif %}
+{% if gi.ignore_builtin is defined and gi.ignore_builtin in ['yes', 'no'] %}
+{{ '  idmap config ' + gi.domain + ' : ignore builtin = ' + gi.ignore_builtin }}
+{% endif %}
+{% if gi.unix_primary_group is defined and
+      gi.unix_primary_group in ['yes', 'no'] %}
+{{ '  idmap config ' + gi.domain + ' : unix_primary_group = ' +
+      gi.unix_primary_group }}
+{% endif %}
+{% if gi.schema_mode is defined and
+      gi.schema_mode in ['rfc2307', 'sfu', 'sfu20'] %}
+{{ '  idmap config ' + gi.domain + ' : schema_mode = ' + gi.schema_mode }}
+{% endif %}
+{% if gi.unix_nss_info is defined and gi.unix_nss_info in ['yes', 'no'] %}
+{{ '  idmap config ' + gi.domain + ' : unix_nss_info = ' + gi.unix_nss_info }}
+{% endif %}
+{% endif %}
+{% endfor %}
+{% endif %}
+{% if g.idmap_negative_cache_time is defined and
+      g.idmap_negative_cache_time != '' %}
+{{ '  idmap negative cache time = ' ~ g.idmap_negative_cache_time }}
+{% endif %}
+{% if g.include_system_krb5_conf is defined and
+      g.include_system_krb5_conf in ['yes', 'no'] %}
+{{ '  include system krb5 conf = ' + g.include_system_krb5_conf }}
+{% endif %}
+{% if g.init_logon_delay is defined and g.init_logon_delay != '' %}
+{{ '  init logon delay = ' ~ g.init_logon_delay }}
+{% endif %}
+{% if g.init_logon_delayed_hosts is defined and
+      g.init_logon_delayed_hosts != '' %}
+{% if g.init_logon_delayed_hosts is string %}
+{{ '  init logon delayed hosts = ' + g.init_logon_delayed_hosts }}
+{% elif g.init_logon_delayed_hosts is sequence %}
+{{ '  init logon delayed hosts = ' + g.init_logon_delayed_hosts | join(' ') }}
+{% endif %}
+{% endif %}
+{% if g.interfaces is defined and g.interfaces != '' %}
+{% if g.interfaces is string %}
+{{ '  interfaces = ' + g.interfaces }}
+{% elif g.interfaces is sequence %}
+{{ '  interfaces = ' + g.interfaces | join(' ') }}
+{% endif %}
+{% endif %}
+{% if g.iprint_server is defined and g.iprint_server != '' %}
+{{ '  iprint server = ' + g.iprint_server }}
+{% endif %}
+{% if g.keepalive is defined and g.keepalive != '' %}
+{{ '  keepalive = ' ~ g.keepalive }}
+{% endif %}
+{% if g.kerberos_encryption_types is defined and
+      g.kerberos_encryption_types in ['all', 'strong', 'legacy'] %}
+{{ '  kerberos encryption types = ' + g.kerberos_encryption_types }}
+{% endif %}
+{% if g.kerberos_method is defined and g.kerberos_method in ['secrets only',
+      'system keytab', 'dedicated keytab', 'secrets and keytab', 'default'] %}
+{{ '  kerberos method = ' + g.kerberos_method }}
+{% endif %}
+{% if g.kernel_change_notify is defined and
+      g.kernel_change_notify in ['yes', 'no'] %}
+{{ '  kernel change notify = ' + g.kernel_change_notify }}
+{% endif %}
+{% if g.kpasswd_port is defined and g.kpasswd_port != '' %}
+{{ '  kpasswd port = ' ~ g.kpasswd_port }}
+{% endif %}
+{% if g.krb5_port is defined and g.krb5_port != '' %}
+{{ '  kpasswd port = ' ~ g.krb5_port }}
+{% endif %}
+{% if g.lanman_auth is defined and g.lanman_auth in ['yes', 'no'] %}
+{{ '  lanman auth = ' + g.lanman_auth }}
+{% endif %}
+{% if g.large_readwrite is defined and g.large_readwrite in ['yes', 'no'] %}
+{{ '  large readwrite = ' + g.large_readwrite }}
+{% endif %}
+{% if g.ldap_admin_dn is defined and g.ldap_admin_dn != '' %}
+{{ '  ldap admin dn = ' + g.ldap_admin_dn }}
+{% endif %}
+{% if g.ldap_connection_timeout is defined and
+      g.ldap_connection_timeout != '' %}
+{{ '  ldap connection timeout = ' ~ g.ldap_connection_timeout }}
+{% endif %}
+{% if g.ldap_debug_level is defined and g.ldap_debug_level != '' %}
+{{ '  ldap debug level = ' ~ g.ldap_debug_level }}
+{% endif %}
+{% if g.ldap_debug_threshold is defined and g.ldap_debug_threshold != '' %}
+{{ '  ldap debug threshold = ' ~ g.ldap_debug_threshold }}
+{% endif %}
+{% if g.ldap_delete_dn is defined and g.ldap_delete_dn in ['yes', 'no'] %}
+{{ '  ldap delete dn = ' + g.ldap_delete_dn }}
+{% endif %}
+{% if g.ldap_deref is defined and
+      g.ldap_deref in ['never', 'finding', 'searching', 'always', 'auto'] %}
+{{ '  ldap deref = ' + g.ldap_deref }}
+{% endif %}
+{% if g.ldap_follow_referral is defined and
+      g.ldap_follow_referral in ['on', 'off', 'default'] %}
+{{ '  ldap follow referral = ' + g.ldap_follow_referral }}
+{% endif %}
+{% if g.ldap_group_suffix is defined and g.ldap_group_suffix != '' %}
+{{ '  ldap group suffix = ' + g.ldap_group_suffix }}
+{% endif %}
+{% if g.ldap_idmap_suffix is defined and g.ldap_idmap_suffix != '' %}
+{{ '  ldap idmap suffix = ' + g.ldap_idmap_suffix }}
+{% endif %}
+{% if g.ldap_machine_suffix is defined and g.ldap_machine_suffix != '' %}
+{{ '  ldap machine suffix = ' + g.ldap_machine_suffix }}
+{% endif %}
+{% if g.ldap_page_size is defined and g.ldap_page_size != '' %}
+{{ '  ldap page size = ' ~ g.ldap_page_size }}
+{% endif %}
+{% if g.ldap_passwd_sync is defined and
+      g.ldap_passwd_sync in ['yes', 'no', 'only'] %}
+{{ '  ldap password sync = ' + g.ldap_passwd_sync }}
+{% endif %}
+{% if g.ldap_replication_sleep is defined and g.ldap_replication_sleep != '' %}
+{{ '  ldap replication sleep = ' ~ g.ldap_replication_sleep }}
+{% endif %}
+{% if g.ldapsam_editposix is defined and g.ldapsam_editposix in ['yes', 'no'] %}
+{{ '  ldapsam:editposix = ' + g.ldapsam_editposix }}
+{% endif %}
+{% if g.ldap_server_require_strong_auth is defined and
+      g.ldap_server_require_strong_auth in ['yes', 'no',
+                                            'allow_sasl_over_tls'] %}
+{{ '  ldap server require strong auth = ' + g.ldap_server_require_strong_auth }}
+{% endif %}
+{% if g.ldap_ssl is defined and g.ldap_ssl in ['off', 'start tls'] %}
+{{ '  ldap server require strong auth = ' + g.ldap_server_require_strong_auth }}
+{% endif %}
+{% if g.ldap_ssl_ads is defined and g.ldap_ssl_ads in ['yes', 'no'] %}
+{{ '  ldap ssl ads = ' + g.ldap_ssl_ads }}
+{% endif %}
+{% if g.ldap_suffix is defined and g.ldap_suffix != '' %}
+{{ '  ldap suffix = ' + g.ldap_suffix }}
+{% endif %}
+{% if g.ldap_timeout is defined and g.ldap_timeout != '' %}
+{{ '  ldap timeout = ' ~ g.ldap_timeout }}
+{% endif %}
+{% if g.lm_announce is defined and g.lm_announce in ['yes', 'no', 'auto'] %}
+{{ '  lm announce = ' + g.lm_announce }}
+{% endif %}
+{% if g.lm_interval is defined and g.lm_interval != '' %}
+{{ '  lm interval = ' ~ g.lm_interval }}
+{% endif %}
+{% if g.load_printers is defined and g.load_printers in ['yes', 'no'] %}
+{{ '  load printers = ' + g.load_printers }}
+{% endif %}
+{% if g.local_master is defined and g.local_master in ['yes', 'no'] %}
+{{ '  local master = ' + g.local_master }}
+{% endif %}
+{% if g.lock_directory is defined and g.lock_directory != '' %}
+{{ '  lock directory = ' + g.lock_directory }}
+{% endif %}
+{% if g.lock_spin_time is defined and g.lock_spin_time != '' %}
+{{ '  lock spin time = ' ~ g.lock_spin_time }}
+{% endif %}
+{% if g.log_file is defined and g.log_file != '' %}
+{{ '  log file = ' + g.log_file }}
+{% endif %}
+{% if g.logging is defined and g.logging != '' %}
+{% if g.logging is string %}
+{{ '  logging = ' + g.logging }}
+{% elif g.logging is sequence %}
+{% for gl in g.logging %}
+{% if loop.first %}
+{{ '  logging =' -}}
+{% endif %}
+{% if gl.backend is defined and gl.backend != '' %}
+{{ ' ' + gl.backend -}}
+{% if gl.log_level is defined and gl.log_level != '' %}
+{{ '@' + gl.log_level -}}
+{% endif %}
+{% endif %}
+{% if loop.last %}
+{{ ' ' }}
+{% endif %}
+{% endfor %}
+{% endif %}
+{% endif %}
+{% if g.log_level is defined and g.log_level != '' %}
+{{ '  log level = ' + g.log_level }}
+{% endif %}
+{% if g.log_nt_token_command is defined and g.log_nt_token_command != '' %}
+{{ '  log nt token command = ' + g.log_nt_token_command }}
+{% endif %}
+{% if g.logon_drive is defined and g.logon_drive != '' %}
+{{ '  logon drive = ' + g.logon_drive }}
+{% endif %}
+{% if g.logon_home is defined and g.logon_home != '' %}
+{{ '  logon home = ' + g.logon_home }}
+{% endif %}
+{% if g.logon_path is defined and g.logon_path != '' %}
+{{ '  logon path = ' + g.logon_path }}
+{% endif %}
+{% if g.logon_script is defined and g.logon_script != '' %}
+{{ '  logon script = ' + g.logon_script }}
+{% endif %}
+{% if g.log_writeable_files_on_exit is defined and
+      g.log_writeable_files_on_exit in ['yes', 'no'] %}
+{{ '  log writeable files on exit = ' + g.log_writeable_files_on_exit }}
+{% endif %}
+{% if g.lpq_cache_time is defined and g.lpq_cache_time != '' %}
+{{ '  lpq cache time = ' + g.lpq_cache_time }}
+{% endif %}
+{% if g.mangle_prefix is defined and g.mangle_prefix != '' %}
+{{ '  mangle prefix = ' ~ g.mangle_prefix }}
+{% endif %}
+{% if g.mangling_method is defined and g.mangling_method in ['hash', 'hash2'] %}
+{{ '  mangling method = ' + g.mangling_method }}
+{% endif %}
+{% if g.map_to_guest is defined and
+      g.map_to_guest in ['Never', 'Bad User', 'Bad Password', 'Bad Uid'] %}
+{{ '  map to guest = ' + g.map_to_guest }}
+{% endif %}
+{% if g.max_disk_size is defined and g.max_disk_size != '' %}
+{{ '  max disk size = ' ~ g.max_disk_size }}
+{% endif %}
+{% if g.max_log_size is defined and g.max_log_size != '' %}
+{{ '  max log size = ' ~ g.max_log_size }}
+{% endif %}
+{% if g.max_mux is defined and g.max_mux != '' %}
+{{ '  max mux = ' ~ g.max_mux }}
+{% endif %}
+{% if g.max_open_files is defined and g.max_open_files != '' %}
+{{ '  max open files = ' ~ g.max_open_files }}
+{% endif %}
+{% if g.max_smbd_processes is defined and g.max_smbd_processes != '' %}
+{{ '  max smbd processes = ' ~ g.max_smbd_processes }}
+{% endif %}
+{% if g.max_stat_cache_size is defined and g.max_stat_cache_size != '' %}
+{{ '  max stat cache size = ' ~ g.max_stat_cache_size }}
+{% endif %}
+{% if g.max_ttl is defined and g.max_ttl != '' %}
+{{ '  max ttl = ' ~ g.max_ttl }}
+{% endif %}
+{% if g.max_wins_ttl is defined and g.max_wins_ttl != '' %}
+{{ '  max wins ttl = ' ~ g.max_wins_ttl }}
+{% endif %}
+{% if g.max_xmit is defined and g.max_xmit != '' %}
+{{ '  max xmit = ' ~ g.max_xmit }}
+{% endif %}
+{% if g.mdns_name is defined and g.mdns_name != '' %}
+{{ '  mdns name = ' ~ g.mdns_name }}
+{% endif %}
+{% if g.message_command is defined and g.message_command != '' %}
+{{ '  message command = ' + g.message_command }}
+{% endif %}
+{% if g.min_receivefile_size is defined and g.min_receivefile_size != '' %}
+{{ '  min receivefile size = ' ~ g.min_receivefile_size }}
+{% endif %}
+{% if g.min_wins_ttl is defined and g.min_wins_ttl != '' %}
+{{ '  min wins ttl = ' ~ g.min_wins_ttl }}
+{% endif %}
+{% if g.mit_kdc_command is defined and g.mit_kdc_command != '' %}
+{{ '  mit kdc command = ' + g.mit_kdc_command }}
+{% endif %}
+{% if g.multicast_dns_register is defined and g.multicast_dns_register != '' %}
+{{ '  multicast dns register = ' + g.multicast_dns_register }}
+{% endif %}
+{% if g.name_cache_timeout is defined and g.name_cache_timeout != '' %}
+{{ '  name cache timeout = ' + g.name_cache_timeout }}
+{% endif %}
+{% if g.name_resolve_order is defined and g.name_resolve_order != '' %}
+{% if g.name_resolve_order is string %}
+{{ '  name resolve order = ' + g.name_resolve_order }}
+{% elif g.name_resolve_order is sequence %}
+{{ '  name resolve order = ' + g.name_resolve_order | join(' ') }}
+{% endif %}
+{% endif %}
+{% if g.nbt_port is defined and g.nbt_port != '' %}
+{{ '  nbt port = ' ~ g.nbt_port }}
+{% endif %}
+{% if g.ncalrpc_dir is defined and g.ncalrpc_dir != '' %}
+{{ '  ncalrpc dir = ' + g.ncalrpc_dir }}
+{% endif %}
+{% if g.netbios_aliases is defined and g.netbios_aliases != '' %}
+{{ '  netbios aliases = ' + g.netbios_aliases }}
+{% endif %}
+{% if g.netbios_name is defined and g.netbios_name != '' %}
+{{ '  netbios name = ' + g.netbios_name }}
+{% endif %}
+{% if g.netbios_scope is defined and g.netbios_scope != '' %}
+{{ '  netbios scope = ' + g.netbios_scope }}
+{% endif %}
+{% if g.neutralize_nt4_emulation is defined and
+      g.neutralize_nt4_emulation in ['yes', 'no'] %}
+{{ '  neutralize nt4 emulation = ' + g.neutralize_nt4_emulation }}
+{% endif %}
+{% if g.nis_homedir is defined and g.nis_homedir in ['yes', 'no'] %}
+{{ '  NIS homedir = ' + g.nis_homedir }}
+{% endif %}
+{% if g.nmbd_bind_explicit_broadcast is defined and
+      g.nmbd_bind_explicit_broadcast in ['yes', 'no'] %}
+{{ '  nmbd bind explicit broadcast = ' + g.nmbd_bind_explicit_broadcast }}
+{% endif %}
+{% if g.ns_update_command is defined and g.ns_update_command != '' %}
+{{ '  nsupdate command = ' + g.ns_update_command }}
+{% endif %}
+{% if g.ntlm_auth is defined and g.ntlm_auth in ['yes', 'no',
+   'ntlmv1-permitted', 'ntlmv2-only', 'mschapv2-and-ntlmv2-only', 'disabled'] %}
+{{ '  ntlm auth = ' + g.ntlm_auth }}
+{% endif %}
+{% if g.nt_pipe_support is defined and g.nt_pipe_support in ['yes', 'no'] %}
+{{ '  nt pipe support = ' + g.nt_pipe_support }}
+{% endif %}
+{% if g.ntp_signd_socket_directory is defined and
+      g.ntp_signd_socket_directory != '' %}
+{{ '  ntp signd socket directory = ' + g.ntp_signd_socket_directory }}
+{% endif %}
+{% if g.nt_status_support is defined and g.nt_status_support in ['yes', 'no'] %}
+{{ '  ntp signd socket directory = ' + g.nt_status_support }}
+{% endif %}
+{% if g.null_passwords is defined and g.null_passwords in ['yes', 'no'] %}
+{{ '  null passwords = ' + g.null_passwords }}
+{% endif %}
+{% if g.obey_pam_restrictions is defined and
+      g.obey_pam_restrictions in ['yes', 'no'] %}
+{{ '  obey pam restrictions = ' + g.obey_pam_restrictions }}
+{% endif %}
+{% if g.old_password_allowed_period is defined and
+      g.old_password_allowed_period != '' %}
+{{ '  old password allowed period = ' ~ g.old_password_allowed_period }}
+{% endif %}
+{% if g.oplock_break_wait_time is defined and g.oplock_break_wait_time != '' %}
+{{ '  oplock break wait time = ' ~ g.oplock_break_wait_time }}
+{% endif %}
+{% if g.os2_driver_map is defined and g.os2_driver_map != '' %}
+{{ '  os2 driver map = ' + g.os2_driver_map }}
+{% endif %}
+{% if g.os_level is defined and g.os_level != '' %}
+{{ '  os level = ' ~ g.os_level }}
+{% endif %}
+{% if g.pam_password_change is defined and
+      g.pam_password_change in ['yes', 'no'] %}
+{{ '  pam password change = ' + g.pam_password_change }}
+{% endif %}
+{% if g.panic_action is defined and g.panic_action != '' %}
+{{ '  panic action = ' + g.panic_action }}
+{% endif %}
+{% if g.passdb_backend is defined and g.passdb_backend != '' %}
+{% for gp in g.passdb_backend %}
+{% if (gp.backend is defined and gp.backend != '') and
+      (gp.location is defined and gp.location != '') %}
+{{ '  passdb backend = ' + gp.backend + ':\"' + gp.location + '\"' }}
+{% endif %}
+{% endfor %}
+{% endif %}
+{% if g.passdb_expand_explicit is defined and
+      g.passdb_expand_explicit in ['yes', 'no'] %}
+{{ '  passdb expand explicit = ' + g.passdb_expand_explicit }}
+{% endif %}
+{% if g.passwd_chat is defined and g.passwd_chat != '' %}
+{{ '  passwd chat = ' + g.passwd_chat }}
+{% endif %}
+{% if g.passwd_chat_debug is defined and g.passwd_chat_debug in ['yes', 'no'] %}
+{{ '  passwd chat debug = ' + g.passwd_chat_debug }}
+{% endif %}
+{% if g.passwd_chat_timeout is defined and g.passwd_chat_timeout != '' %}
+{{ '  passwd chat timeout = ' + g.passwd_chat_timeout }}
+{% endif %}
+{% if g.passwd_program is defined and g.passwd_program != '' %}
+{{ '  passwd program = ' + g.passwd_program }}
+{% endif %}
+{% if g.password_hash_gpg_key_ids is defined and
+      g.password_hash_gpg_key_ids != '' %}
+{{ '  password hash gpg key ids = ' + g.password_hash_gpg_key_ids }}
+{% endif %}
+{% if g.password_hash_user_password_schemes is defined and
+      g.password_hash_user_password_schemes != '' %}
+{% if g.password_hash_user_password_schemes is string %}
+{{ '  password hash userPassword schemes = ' +
+   g.password_hash_user_password_schemes }}
+{% elif g.password_hash_user_password_schemes is sequence %}
+{% for gp in g.password_hash_user_password_schemes %}
+{% if loop.first %}
+{{ '  password hash userPassword schemes =' -}}
+{% endif %}
+{% if gp.hash is defined and gp.hash != '' %}
+{{ ' ' + gp.hash -}}
+{% if gp.rounds is defined and gp.rounds != '' %}
+{{ ':rounds=' ~ gp.rounds ~ ' ' -}}
+{% endif %}
+{% endif %}
+{% if loop.last %}
+{{ ' ' }}
+{% endif %}
+{% endfor %}
+{% endif %}
+{% endif %}
+{% if g.password_server is defined and g.password_server != '' %}
+{{ '  password server = ' + g.password_server }}
+{% endif %}
+{% if g.perfcount_module is defined and g.perfcount_module != '' %}
+{{ '  perfcount module = ' + g.perfcount_module }}
+{% endif %}
+{% if g.pid_directory is defined and g.pid_directory != '' %}
+{{ '  pid directory = ' + g.pid_directory }}
+{% endif %}
+{% if g.preferred_master is defined and g.preferred_master in ['yes', 'no'] %}
+{{ '  preferred master = ' + g.preferred_master }}
+{% endif %}
+{% if g.prefork_backoff_increment is defined and
+      g.prefork_backoff_increment != '' %}
+{{ '  prefork backoff increment = ' ~ g.prefork_backoff_increment }}
+{% endif %}
+{% if g.prefork_children is defined and g.prefork_children != '' %}
+{{ '  prefork children = ' ~ g.prefork_children }}
+{% endif %}
+{% if g.prefork_maximum_backoff is defined and
+      g.prefork_maximum_backoff != '' %}
+{{ '  prefork maximum backoff = ' ~ g.prefork_maximum_backoff }}
+{% endif %}
+{% if g.preload_modules is defined and g.preload_modules != '' %}
+{{ '  preload modules = ' + g.preload_modules }}
+{% endif %}
+{% if g.printcap_cache_time is defined and g.printcap_cache_time != '' %}
+{{ '  printcap cache time = ' ~ g.printcap_cache_time }}
+{% endif %}
+{% if g.printcap_name is defined and g.printcap_name != '' %}
+{{ '  printcap name = ' + g.printcap_name }}
+{% endif %}
+{% if g.private_dir is defined and g.private_dir != '' %}
+{{ '  private dir = ' + g.private_dir }}
+{% endif %}
+{% if g.raw_ntlmv2_auth is defined and g.raw_ntlmv2_auth in ['yes', 'no'] %}
+{{ '  raw NTLMv2 auth = ' + g.raw_ntlmv2_auth }}
+{% endif %}
+{% if g.read_raw is defined and g.read_raw in ['yes', 'no'] %}
+{{ '  read raw = ' + g.read_raw }}
+{% endif %}
+{% if g.realm is defined and g.realm != '' %}
+{{ '  realm = ' + g.realm }}
+{% endif %}
+{% if g.registry_shares is defined and g.registry_shares in ['yes', 'no'] %}
+{{ '  registry shares = ' + g.registry_shares }}
+{% endif %}
+{% if g.reject_md5_clients is defined and
+      g.reject_md5_clients in ['yes', 'no'] %}
+{{ '  reject md5 clients = ' + g.reject_md5_clients }}
+{% endif %}
+{% if g.remote_announce is defined and g.remote_announce != '' %}
+{{ '  remote announce = ' + g.remote_announce }}
+{% endif %}
+{% if g.remote_browse_sync is defined and g.remote_browse_sync != '' %}
+{{ '  remote browse sync = ' + g.remote_browse_sync }}
+{% endif %}
+{% if g.rename_user_script is defined and g.rename_user_script != '' %}
+{{ '  rename user script = ' + g.rename_user_script }}
+{% endif %}
+{% if g.require_strong_key is defined and
+      g.require_strong_key in ['yes', 'no'] %}
+{{ '  require strong key = ' + g.require_strong_key }}
+{% endif %}
+{% if g.reset_on_zero_vc is defined and g.reset_on_zero_vc in ['yes', 'no'] %}
+{{ '  reset on zero vc = ' + g.reset_on_zero_vc }}
+{% endif %}
+{% if g.restrict_anonymous is defined and
+      g.restrict_anonymous in ['yes', 'no'] %}
+{{ '  restrict anonymous = ' + g.restrict_anonymous }}
+{% endif %}
+{% if g.rndc_command is defined and g.rndc_command != '' %}
+{{ '  rndc command = ' + g.rndc_command }}
+{% endif %}
+{% if g.root_directory is defined and g.root_directory != '' %}
+{{ '  root directory = ' + g.root_directory }}
+{% endif %}
+{% if g.rpc_big_endian is defined and g.rpc_big_endian in ['yes', 'no'] %}
+{{ '  rpc big endian = ' + g.rpc_big_endian }}
+{% endif %}
+{% if g.rpc_server_dynamic_port_range is defined and
+      g.rpc_server_dynamic_port_range != '' %}
+{{ '  rpc server dynamic port range = ' ~ g.rpc_server_dynamic_port_range }}
+{% endif %}
+{% if g.rpc_server_port is defined and g.rpc_server_port != '' %}
+{{ '  rpc server port = ' ~ g.rpc_server_port }}
+{% endif %}
+{% if g.samba_kcc_command is defined and g.samba_kcc_command != '' %}
+{{ '  samba kcc command = ' + g.samba_kcc_command }}
+{% endif %}
+{% if g.security is defined and
+      g.security in ['auto', 'user', 'domain', 'ads'] %}
+{{ '  security = ' + g.security }}
+{% endif %}
+{% if g.server_max_protocol is defined and g.server_max_protocol != '' %}
+{{ '  server max protocol = ' + g.server_max_protocol }}
+{% endif %}
+{% if g.server_min_protocol is defined and g.server_min_protocol != '' %}
+{{ '  server min protocol = ' + g.server_min_protocol }}
+{% endif %}
+{% if g.server_multi_channel_support is defined and
+      g.server_multi_channel_support in ['yes', 'no'] %}
+{{ '  server multi channel support = ' + g.server_multi_channel_support }}
+{% endif %}
+{% if g.server_role is defined and g.server_role in ['auto', 'standalone',
+   'member server', 'classic primary domain controller',
+   'classic backup domain controller', 'active directly domain controller'] %}
+{{ '  server role = ' + g.server_role }}
+{% endif %}
+{% if g.server_services is defined and g.server_services != '' %}
+{{ '  server services = ' + g.server_services | join(', ') }}
+{% endif %}
+{% if g.server_signing is defined and
+      g.server_signing in ['default', 'auto', 'mandatory' and 'disabled'] %}
+{{ '  server signing = ' + g.server_signing }}
+{% endif %}
+{% if g.server_string is defined and g.server_string != '' %}
+{{ '  server string = ' + g.server_string }}
+{% endif %}
+{% if g.set_primary_group_script is defined and
+      g.set_primary_group_script != '' %}
+{{ '  set primary group script = ' + g.set_primary_group_script }}
+{% endif %}
+{% if g.set_quota_command is defined and g.set_quota_command != '' %}
+{{ '  set quota command = ' + g.set_quota_command }}
+{% endif %}
+{% if g.share_backend is defined and g.share_backend != '' %}
+{{ '  share backend = ' + g.share_backend }}
+{% endif %}
+{% if g.share_fake_fscaps is defined and g.share_fake_fscaps != '' %}
+{{ '  share:fake_fscaps = ' + g.share_fake_fscaps }}
+{% endif %}
+{% if g.show_add_printer_wizard is defined and
+      g.show_add_printer_wizard in ['yes', 'no'] %}
+{{ '  show add printer wizard = ' + g.show_add_printer_wizard }}
+{% endif %}
+{% if g.shutdown_script is defined and g.shutdown_script != '' %}
+{{ '  shutdown script = ' + g.shutdown_script }}
+{% endif %}
+{% if g.smb2_leases is defined and g.smb2_leases in ['yes', 'no'] %}
+{{ '  smb2 leases = ' + g.smb2_leases }}
+{% endif %}
+{% if g.smb2_max_credits is defined and g.smb2_max_credits != '' %}
+{{ '  smb2 max credits = ' ~ g.smb2_max_credits }}
+{% endif %}
+{% if g.smb2_max_read is defined and g.smb2_max_read != '' %}
+{{ '  smb2 max read = ' ~ g.smb2_max_read }}
+{% endif %}
+{% if g.smb2_max_trans is defined and g.smb2_max_trans != '' %}
+{{ '  smb2 max trans = ' ~ g.smb2_max_trans }}
+{% endif %}
+{% if g.smb2_max_write is defined and g.smb2_max_write != '' %}
+{{ '  smb2 max write = ' ~ g.smb2_max_write }}
+{% endif %}
+{% if g.smbd_profiling_level is defined and
+      g.smbd_profiling_level in ['on', 'off', 'count'] %}
+{{ '  smbd profiling level = ' + g.smbd_profiling_level }}
+{% endif %}
+{% if g.smb_passwd_file is defined and g.smb_passwd_file != '' %}
+{{ '  smb passwd file = ' + g.smb_passwd_file }}
+{% endif %}
+{% if g.smb_ports is defined and g.smb_ports != '' %}
+{{ '  smb ports = ' ~ g.smb_ports }}
+{% endif %}
+{% if g.socket_options is defined and g.socket_options != '' %}
+{{ '  socket options = ' + g.socket_options | join(' ') }}
+{% endif %}
+{% if g.spn_update_command is defined and g.spn_update_command != '' %}
+{{ '  spn update command = ' + g.spn_update_command }}
+{% endif %}
+{% if g.spoolss_architecture is defined and g.spoolss_architecture != '' %}
+{{ '  spoolss: architecture = ' + g.spoolss_architecture }}
+{% endif %}
+{% if g.spoolss_os_major is defined and g.spoolss_os_major != '' %}
+{{ '  spoolss: os_major = ' ~ g.spoolss_os_major }}
+{% endif %}
+{% if g.spoolss_os_minor is defined and g.spoolss_os_minor != '' %}
+{{ '  spoolss: os_minor = ' ~ g.spoolss_os_minor }}
+{% endif %}
+{% if g.spoolss_os_build is defined and g.spoolss_os_build != '' %}
+{{ '  spoolss: os_build = ' ~ g.spoolss_os_build }}
+{% endif %}
+{% if g.spoolss_client_os_major is defined and
+      g.spoolss_client_os_major != '' %}
+{{ '  spoolss_client: os_major = ' ~ g.spoolss_client_os_major }}
+{% endif %}
+{% if g.spoolss_client_os_minor is defined and
+      g.spoolss_client_os_minor != '' %}
+{{ '  spoolss_client: os_minor = ' ~ g.spoolss_client_os_minor }}
+{% endif %}
+{% if g.spoolss_client_os_build is defined and
+      g.spoolss_client_os_build != '' %}
+{{ '  spoolss_client: os_build = ' ~ g.spoolss_client_os_build }}
+{% endif %}
+{% if g.stat_cache is defined and g.stat_cache in ['yes', 'no'] %}
+{{ '  stat cache = ' + g.stat_cache }}
+{% endif %}
+{% if g.state_directory is defined and g.state_directory != '' %}
+{{ '  state directory = ' + g.state_directory }}
+{% endif %}
+{% if g.svcctl_list is defined and g.svcctl_list != '' %}
+{{ '  svcctl list = ' + g.svcctl_list }}
+{% endif %}
+{% if g.syslog is defined and g.syslog != '' %}
+{{ '  syslog = ' ~ g.syslog }}
+{% endif %}
+{% if g.syslog_only is defined and g.syslog_only in ['yes', 'no'] %}
+{{ '  syslog only = ' + g.syslog_only }}
+{% endif %}
+{% if g.template_homedir is defined and g.template_homedir != '' %}
+{{ '  template homedir = ' + g.template_homedir }}
+{% endif %}
+{% if g.template_shell is defined and g.template_shell != '' %}
+{{ '  template shell = ' + g.template_shell }}
+{% endif %}
+{% if g.time_server is defined and g.time_server in ['yes', 'no'] %}
+{{ '  time server = ' + g.time_server }}
+{% endif %}
+{% if g.timestamp_logs is defined and g.timestamp_logs in ['yes', 'no'] %}
+{{ '  time server = ' + g.timestamp_logs }}
+{% endif %}
+{% if g.tls_cafile is defined and g.tls_cafile != '' %}
+{{ '  tls cafile = ' + g.tls_cafile }}
+{% endif %}
+{% if g.tls_certfile is defined and g.tls_certfile != '' %}
+{{ '  tls certfile = ' + g.tls_certfile }}
+{% endif %}
+{% if g.tls_crlfile is defined and g.tls_crlfile != '' %}
+{{ '  tls crlfile = ' + g.tls_crlfile }}
+{% endif %}
+{% if g.tls_dh_params_file is defined and g.tls_dh_params_file != '' %}
+{{ '  tls dh params file = ' + g.tls_dh_params_file }}
+{% endif %}
+{% if g.tls_enabled is defined and g.tls_enabled in ['yes', 'no'] %}
+{{ '  tls enabled = ' + g.tls_enabled }}
+{% endif %}
+{% if g.tls_keyfile is defined and g.tls_keyfile != '' %}
+{{ '  tls keyfile = ' + g.tls_keyfile }}
+{% endif %}
+{% if g.tls_priority is defined and g.tls_priority != '' %}
+{{ '  tls priority = ' + g.tls_priority }}
+{% endif %}
+{% if g.tls_verify_peer is defined and g.tls_verify_peer in ['no_check',
+   'ca_only', 'ca_and_name_if_available', 'ca_and_name',
+   'as_strict_as_possible'] %}
+{{ '  tls verify peer = ' + g.tls_verify_peer }}
+{% endif %}
+{% if g.unicode is defined and g.unicode in ['yes', 'no'] %}
+{{ '  unicode = ' + g.unicode }}
+{% endif %}
+{% if g.unix_charset is defined and g.unix_charset != '' %}
+{{ '  unix charset = ' + g.unix_charset }}
+{% endif %}
+{% if g.unix_extensions is defined and g.unix_extensions in ['yes', 'no'] %}
+{{ '  unix extensions = ' + g.unix_extensions }}
+{% endif %}
+{% if g.unix_password_sync is defined and
+      g.unix_password_sync in ['yes', 'no'] %}
+{{ '  unix password sync = ' + g.unix_password_sync }}
+{% endif %}
+{% if g.use_mmap is defined and g.use_mmap in ['yes', 'no'] %}
+{{ '  use mmap = ' + g.use_mmap }}
+{% endif %}
+{% if g.username_level is defined and g.username_level != '' %}
+{{ '  username level = ' + g.username_level }}
+{% endif %}
+{% if g.username_map_cache_time is defined and
+      g.username_map_cache_time != '' %}
+{{ '  username map cache time = ' ~ g.username_map_cache_time }}
+{% endif %}
+{% if g.username_map_script is defined and g.username_map_script != '' %}
+{{ '  username map script = ' + g.username_map_script }}
+{% endif %}
+{% if g.usershare_allow_guests is defined and
+      g.usershare_allow_guests in ['yes', 'no'] %}
+{{ '  usershare allow guests = ' + g.usershare_allow_guests }}
+{% endif %}
+{% if g.usershare_max_shares is defined and g.usershare_max_shares != '' %}
+{{ '  usershare max shares = ' ~ g.usershare_max_shares }}
+{% endif %}
+{% if g.usershare_owner_only is defined and
+      g.usershare_owner_only in ['yes', 'no'] %}
+{{ '  usershare owner only = ' + g.usershare_owner_only }}
+{% endif %}
+{% if g.usershare_path is defined and g.usershare_path != '' %}
+{{ '  usershare path = ' + g.usershare_path }}
+{% endif %}
+{% if g.usershare_prefix_allow_list is defined and
+      g.usershare_prefix_allow_list != '' %}
+{{ '  usershare prefix allow list = ' +
+   g.usershare_prefix_allow_list | join (' ') }}
+{% endif %}
+{% if g.usershare_prefix_deny_list is defined and
+      g.usershare_prefix_deny_list != '' %}
+{{ '  usershare prefix deny list = ' +
+   g.usershare_prefix_deny_list | join (' ') }}
+{% endif %}
+{% if g.usershare_template_share is defined and
+      g.usershare_template_share != '' %}
+{{ '  usershare template share = ' + g.usershare_template_share }}
+{% endif %}
+{% if g.utmp is defined and g.utmp in ['yes', 'no'] %}
+{{ '  utmp = ' + g.utmp }}
+{% endif %}
+{% if g.utmp_directory is defined and g.utmp_directory != '' %}
+{{ '  utmp directory = ' + g.utmp_directory }}
+{% endif %}
+{% if g.web_port is defined and g.web_port != '' %}
+{{ '  web port = ' ~ g.web_port }}
+{% endif %}
+{% if g.winbind_cache_time is defined and g.winbind_cache_time != '' %}
+{{ '  winbind cache time = ' ~ g.winbind_cache_time }}
+{% endif %}
+{% if g.winbindd_socket_directory is defined and
+      g.winbindd_socket_directory != '' %}
+{{ '  winbindd socket directory = ' + g.winbindd_socket_directory }}
+{% endif %}
+{% if g.winbind_enum_groups is defined and
+      g.winbind_enum_groups in ['yes', 'no'] %}
+{{ '  winbind enum groups = ' + g.winbind_enum_groups }}
+{% endif %}
+{% if g.winbind_enum_users is defined and
+      g.winbind_enum_users in ['yes', 'no'] %}
+{{ '  winbind enum users = ' + g.winbind_enum_users }}
+{% endif %}
+{% if g.winbind_expand_groups is defined and g.winbind_expand_groups != '' %}
+{{ '  winbind expand groups = ' + g.winbind_expand_groups }}
+{% endif %}
+{% if g.winbind_ignore_domains is defined and g.winbind_ignore_domains != '' %}
+{{ '  winbind:ignore domains = ' + g.winbind_ignore_domains | join(', ') }}
+{% endif %}
+{% if g.winbind_max_clients is defined and g.winbind_max_clients != '' %}
+{{ '  winbind max clients = ' ~ g.winbind_max_clients }}
+{% endif %}
+{% if g.winbind_max_domain_connections is defined and
+      g.winbind_max_domain_connections != '' %}
+{{ '  winbind max domain connections = ' ~ g.winbind_max_domain_connections }}
+{% endif %}
+{% if g.winbind_nested_groups is defined and
+      g.winbind_nested_groups in ['yes', 'no'] %}
+{{ '  winbind nested groups = ' + g.winbind_nested_groups }}
+{% endif %}
+{% if g.winbind_normalize_names is defined and
+      g.winbind_normalize_names in ['yes', 'no'] %}
+{{ '  winbind normalize names = ' + g.winbind_normalize_names }}
+{% endif %}
+{% if g.winbind_nss_info is defined and
+      g.winbind_nss_info in ['template', 'sfu', 'sfu20', 'rfc2307'] %}
+{{ '  winbind nss info = ' + g.winbind_nss_info }}
+{% endif %}
+{% if g.winbind_offline_logon is defined and
+      g.winbind_offline_logon in ['yes', 'no'] %}
+{{ '  winbind offline logon = ' + g.winbind_offline_logon }}
+{% endif %}
+{% if g.winbind_reconnect_delay is defined and
+      g.winbind_reconnect_delay != '' %}
+{{ '  winbind reconnect delay = ' ~ g.winbind_reconnect_delay }}
+{% endif %}
+{% if g.winbind_refresh_tickets is defined and
+      g.winbind_refresh_tickets in ['yes', 'no'] %}
+{{ '  winbind refresh tickets = ' + g.winbind_refresh_tickets }}
+{% endif %}
+{% if g.winbind_request_timeout is defined and
+      g.winbind_request_timeout != '' %}
+{{ '  winbind request timeout = ' ~ g.winbind_request_timeout }}
+{% endif %}
+{% if g.winbind_rpc_only is defined and g.winbind_rpc_only in ['yes', 'no'] %}
+{{ '  winbind rpc only = ' + g.winbind_rpc_only }}
+{% endif %}
+{% if g.winbind_scan_trusted_domains is defined and
+      g.winbind_scan_trusted_domains in ['yes', 'no'] %}
+{{ '  winbind scan truested domains = ' + g.winbind_scan_trusted_domains }}
+{% endif %}
+{% if g.winbind_sealed_pipes is defined and
+      g.winbind_sealed_pipes in ['yes', 'no'] %}
+{{ '  winbind sealed pipes = ' + g.winbind_sealed_pipes }}
+{% endif %}
+{% if g.winbind_separator is defined and g.winbind_separator != '' %}
+{{ '  winbind separator = ' + g.winbind_separator }}
+{% endif %}
+{% if g.winbind_use_default_domain is defined and
+      g.winbind_use_default_domain in ['yes', 'no'] %}
+{{ '  winbind use default domain = ' + g.winbind_use_default_domain }}
+{% endif %}
+{% if g.winsdb_local_owner is defined and g.winsdb_local_owner != '' %}
+{{ '  winbind:local_owner = ' + g.winsdb_local_owner }}
+{% endif %}
+{% if g.winsdb_dbnosync is defined and g.winsdb_dbnosync != '' %}
+{{ '  winsdb:dbnosync = ' + g.winsdb_dbnosync }}
+{% endif %}
+{% if g.wins_hook is defined and g.wins_hook != '' %}
+{{ '  wins hook = ' + g.wins_hook }}
+{% endif %}
+{% if g.wins_proxy is defined and g.wins_proxy in ['yes', 'no'] %}
+{{ '  wins proxy = ' + g.wins_proxy }}
+{% endif %}
+{% if g.wins_server is defined and g.wins_server != '' %}
+{{ '  wins server = ' + g.wins_server | join(' ') }}
+{% endif %}
+{% if g.wins_support is defined and g.wins_support in ['yes', 'no'] %}
+{{ '  wins support = ' + g.wins_support }}
+{% endif %}
+{% if g.workgroup is defined and g.workgroup != '' %}
+{{ '  workgroup = ' + g.workgroup }}
+{% endif %}
+{% if g.wreplsrv_periodic_interval is defined and
+      g.wreplsrv_periodic_interval != '' %}
+{{ '  wreplsrv:periodic_interval = ' ~ g.wreplsrv_periodic_interval }}
+{% endif %}
+{% if g.wreplsrv_propagate_name_releases is defined and
+      g.wreplsrv_propagate_name_releases in ['yes', 'no'] %}
+{{ '  wreplsrv:propagate name releases = ' +
+    g.wreplsrv_propagate_name_releases }}
+{% endif %}
+{% if g.wreplsrv_scavenging_interval is defined and
+      g.wreplsrv_scavenging_interval != '' %}
+{{ '  wreplsrv:scavenging_interval = ' ~ g.wreplsrv_scavenging_interval }}
+{% endif %}
+{% if g.wreplsrv_tombstone_extra_timeout is defined and
+      g.wreplsrv_tombstone_extra_timeout != '' %}
+{{ '  wreplsrv:tombstone_extra_timeout = ' ~
+    g.wreplsrv_tombstone_extra_timeout }}
+{% endif %}
+{% if g.wreplsrv_tombstone_interval is defined and
+      g.wreplsrv_tombstone_interval != '' %}
+{{ '  wreplsrv:tombstone_interval = ' ~ g.wreplsrv_tombstone_interval }}
+{% endif %}
+{% if g.wreplsrv_tombstone_timeout is defined and
+      g.wreplsrv_tombstone_timeout != '' %}
+{{ '  wreplsrv:tombstone_timeout = ' ~ g.wreplsrv_tombstone_timeout }}
+{% endif %}
+{% if g.wreplsrv_verify_interval is defined and
+      g.wreplsrv_verify_interval != '' %}
+{{ '  wreplsrv:verify_interval = ' ~ g.wreplsrv_verify_interval }}
+{% endif %}
+{% if g.write_raw is defined and g.write_raw in ['yes', 'no'] %}
+{{ '  write raw = ' ~ g.write_raw }}
+{% endif %}
+{% if g.wtmp_directory is defined and g.wtmp_directory != '' %}
+{{ '  wtmp directory = ' ~ g.wtmp_directory }}
+{% endif %}

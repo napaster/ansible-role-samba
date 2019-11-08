@@ -1,0 +1,116 @@
+{{ '## ' + 'ctdb.conf' }}
+{{ '# ' + ansible_managed }}
+{{ '# ' + 'Do not edit manually' }}
+
+{% if vars['samba_ctdb_settings'] is defined and
+      vars['samba_ctdb_settings'] != '' %}
+{% for c in vars['samba_ctdb_settings'] %}
+{% if c.logging is defined and c.logging != '' %}
+{{ '[logging]' }}
+{% for cl in c.logging %}
+{% if cl.log_level is defined and
+      cl.log_level in ['ERROR', 'WARNING', 'NOTICE', 'INFO', 'DEBUG'] %}
+{{ '  log level = ' + cl.log_level }}
+{% endif %}
+{% if cl.location is defined and cl.location != '' %}
+{{ '  location = ' + cl.location }}
+{% endif %}
+{% endfor %}
+{% endif %}
+{% if c.cluster is defined and c.cluster != '' %}
+{{ '[cluster]' }}
+{% for cc in c.cluster %}
+{% if cc.recovery_lock is defined and cc.recovery_lock != '' %}
+{% for ccr in cc.recovery_lock %}
+{% if ccr.type is defined and ccr.type != '' %}
+{% if ccr.type in 'fs' %}
+{% if ccr.path is defined and ccr.path != '' %}
+{{ '  recovery lock = ' + ccr.path }}
+{% endif %}
+{% elif ccr.type in 'rados' %}
+{{ '  recovery lock = !' ~
+    hostvars[inventory_hostname]['samba_rados_mutex_path'] ~ ' ' ~ ccr.cluster ~
+    ' client.' ~ ccr.client ~ ' ' ~ ccr.pool ~ ' ' ~ ccr.object }}
+{% endif %}
+{% if ccr.node_address is defined and ccr.node_address | ipaddr('host') %}
+{{ '  node address = ' + ccr.node_address }}
+{% endif %}
+{% if ccr.transport is defined and ccr.transport in ['tcp', 'ib'] %}
+{{ '  transport = ' + ccr.transport }}
+{% endif %}
+{% endif %}
+{% endfor %}
+{% endif %}
+{% endfor %}
+{% endif %}
+{% if c.database is defined and c.database != '' %}
+{{ '[database]' }}
+{% for cd in c.database %}
+{% if cd.volatile_database_directory is defined and
+      cd.volatile_database_directory != '' %}
+{{ '  volatile database directory = ' + cd.volatile_database_directory }}
+{% endif %}
+{% if cd.persistent_database_directory is defined and
+      cd.persistent_database_directory != '' %}
+{{ '  persistent database directory = ' + cd.persistent_database_directory }}
+{% endif %}
+{% if cd.state_database_directory is defined and
+      cd.state_database_directory != '' %}
+{{ '  state database directory = ' + cd.state_database_directory }}
+{% endif %}
+{% if cd.state_database_directory is defined and
+      cd.state_database_directory != '' %}
+{{ '  state database directory = ' + cd.state_database_directory }}
+{% endif %}
+{% if cd.tdb_mutexes is defined and cd.tdb_mutexes in ['true', 'false'] %}
+{{ '  tdb mutexes = ' + cd.tdb_mutexes }}
+{% endif %}
+{% if cd.lock_debug_script is defined and cd.lock_debug_script != '' %}
+{{ '  lock debug script = ' + cd.lock_debug_script }}
+{% endif %}
+{% endfor %}
+{% endif %}
+{% if c.event is defined and c.event != '' %}
+{% for ce in c.event %}
+{% if ce.debug_script is defined and ce.debug_script != '' %}
+{{ '  debug script = ' + ce.debug_script }}
+{% endif %}
+{% endfor %}
+{% endif %}
+{% if c.failover is defined and c.failover != '' %}
+{% for cf in c.failover %}
+{% if cf.disabled is defined and cf.disabled in ['true', 'false'] %}
+{{ '  disabled = ' + cf.disabled }}
+{% endif %}
+{% endfor %}
+{% endif %}
+{% if c.legacy is defined and c.legacy != '' %}
+{% for cl in c.legacy %}
+{% if cl.ctdb_start_as_stopped is defined and
+      cl.ctdb_start_as_stopped in ['true', 'false'] %}
+{{ '  ctdb start as stopped = ' + cl.ctdb_start_as_stopped }}
+{% endif %}
+{% if cl.start_as_disabled is defined and
+      cl.start_as_disabled in ['true', 'false'] %}
+{{ '  start as disabled = ' + cl.start_as_disabled }}
+{% endif %}
+{% if cl.realtime_scheduling is defined and
+      cl.realtime_scheduling in ['true', 'false'] %}
+{{ '  realtime scheduling = ' + cl.realtime_scheduling }}
+{% endif %}
+{% if cl.recmaster_capability is defined and
+      cl.recmaster_capability in ['true', 'false'] %}
+{{ '  recmaster capability = ' + cl.recmaster_capability }}
+{% endif %}
+{% if cl.lmaster_capability is defined and
+      cl.lmaster_capability in ['true', 'false'] %}
+{{ '  lmaster capability = ' + cl.lmaster_capability }}
+{% endif %}
+{% if cl.script_log_level is defined and
+      cl.script_log_level in ['ERROR', 'WARNING', 'NOTICE', 'INFO', 'DEBUG'] %}
+{{ '  script log level = ' + cl.script_log_level }}
+{% endif %}
+{% endfor %}
+{% endif %}
+{% endfor %}
+{% endif %}

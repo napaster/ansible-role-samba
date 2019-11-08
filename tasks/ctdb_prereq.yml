@@ -1,0 +1,15 @@
+---
+- name: samba | Gather services facts
+  service_facts:
+- name: samba | Set facts about ctdb service
+  set_fact:
+    samba_ctdb_service_facts: "{{
+      hostvars[inventory_hostname]['services']['ctdb.service']['state'] }}"
+  ignore_errors: "true"
+- name: samba | Assert that ctdb service is present in service_facts collection
+  assert:
+    that:
+    - "vars['samba_ctdb_service_facts'] is defined"
+    - "vars['samba_ctdb_service_facts'] != []"
+    msg: "Can't fetch state of ctdb service. Doesn't exist?"
+    quiet: "true"

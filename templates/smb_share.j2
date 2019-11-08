@@ -1,0 +1,472 @@
+{% if s.access_based_share_enum is defined and
+      s.access_based_share_enum in ['yes', 'no'] %}
+{{ '  access based share enum = ' + s.access_based_share_enum }}
+{% endif %}
+{% if s.acl_allow_execute_always is defined and
+      s.acl_allow_execute_always in ['yes', 'no'] %}
+{{ '  acl allow execute always = ' + s.acl_allow_execute_always }}
+{% endif %}
+{% if s.acl_check_permissions is defined and
+      s.acl_check_permissions in ['yes', 'no'] %}
+{{ '  acl check permissions = ' + s.acl_check_permissions }}
+{% endif %}
+{% if s.acl_group_control is defined and
+      s.acl_group_control in ['yes', 'no'] %}
+{{ '  acl group control = ' + s.acl_group_control }}
+{% endif %}
+{% if s.acl_map_full_control is defined and
+      s.acl_map_full_control in ['yes', 'no'] %}
+{{ '  acl map full control = ' + s.acl_map_full_control }}
+{% endif %}
+{% if s.administrative_share is defined and
+      s.administrative_share in ['yes', 'no'] %}
+{{ '  administrative share = ' + s.administrative_share }}
+{% endif %}
+{% if s.admin_users is defined and s.admin_users != '' %}
+{% if s.admin_users is string %}
+{{ '  admin users = ' + s.admin_users }}
+{% elif s.admin_users is sequence %}
+{{ '  admin users = ' + s.admin_users | join(' ') }}
+{% endif %}
+{% endif %}
+{% if s.afs_share is defined and s.afs_share in ['yes', 'no'] %}
+{{ '  afs share = ' + s.afs_share }}
+{% endif %}
+{% if s.aio_read_size is defined and s.aio_read_size != '' %}
+{{ '  aio read size = ' ~ s.aio_read_size }}
+{% endif %}
+{% if s.aio_write_behind is defined and s.aio_write_behind != '' %}
+{{ '  aio write behind = ' + s.aio_write_behind }}
+{% endif %}
+{% if s.aio_write_size is defined and s.aio_write_size != '' %}
+{{ '  aio write size = ' ~ s.aio_write_size }}
+{% endif %}
+{% if s.allocation_roundup_size is defined and
+      s.allocation_roundup_size != '' %}
+{{ '  allocation roundup size = ' + s.allocation_roundup_size }}
+{% endif %}
+{% if s.blocking_locks is defined and s.blocking_locks in ['yes', 'no'] %}
+{{ '  blocking locks = ' + s.blocking_locks }}
+{% endif %}
+{% if s.block_size is defined and s.block_size != '' %}
+{{ '  block size = ' ~ s.block_size }}
+{% endif %}
+{% if s.browseable is defined and s.browseable in ['yes', 'no'] %}
+{{ '  browseable = ' + s.browseable }}
+{% endif %}
+{% if s.case_sensitive is defined and s.case_sensitive in ['yes', 'no',
+                                                                 'auto'] %}
+{{ '  case sensitive = ' + s.case_sensitive }}
+{% endif %}
+{% if s.check_parent_directory_delete_on_close is defined and
+      s.check_parent_directory_delete_on_close in ['yes', 'no'] %}
+{{ '  check parent directory delete on close = ' +
+    s.check_parent_directory_delete_on_close }}
+{% endif %}
+{% if s.copy is defined and s.copy in ['yes', 'no'] %}
+{{ '  copy = ' + s.copy }}
+{% endif %}
+{% if s.create_mask is defined and s.create_mask != '' %}
+{{ '  create mask = ' + s.create_mask }}
+{% endif %}
+{% if s.csc_policy is defined and
+      s.csc_policy in ['manual', 'documents', 'programs', 'disable'] %}
+{{ '  csc policy = ' + s.csc_policy }}
+{% endif %}
+{% if s.cups_options is defined and s.cups_options != '' %}
+{{ '  cups options = ' + s.cups_options }}
+{% endif %}
+{% if s.default_case is defined and s.default_case != '' %}
+{{ '  default case = ' + s.default_case }}
+{% endif %}
+{% if s.default_devmode is defined and
+      s.default_devmode in ['yes', 'no'] %}
+{{ '  default devmode = ' + s.default_devmode }}
+{% endif %}
+{% if s.delete_readonly is defined and
+      s.delete_readonly in ['yes', 'no'] %}
+{{ '  delete readonly = ' + s.delete_readonly }}
+{% endif %}
+{% if s.delete_veto_files is defined and
+      s.delete_veto_files in ['yes', 'no'] %}
+{{ '  delete veto files = ' + s.delete_veto_files }}
+{% endif %}
+{% if s.dfree_cache_time is defined and s.dfree_cache_time != '' %}
+{{ '  dfree cache time = ' ~ s.dfree_cache_time }}
+{% endif %}
+{% if s.dfree_command is defined and s.dfree_command != '' %}
+{{ '  dfree command = ' + s.dfree_command }}
+{% endif %}
+{% if s.directory_mask is defined and s.directory_mask != '' %}
+{{ '  directory mask = ' ~ s.directory_mask }}
+{% endif %}
+{% if s.directory_name_cache_size is defined and
+      s.directory_name_cache_size != '' %}
+{{ '  directory name cache size = ' ~ s.directory_name_cache_size }}
+{% endif %}
+{% if s.dmapi_support is defined and s.dmapi_support in ['yes', 'no'] %}
+{{ '  dmapi support = ' + s.dmapi_support }}
+{% endif %}
+{% if s.dont_descend is defined and s.dont_descend != '' %}
+{{ '  dont descend = ' + s.dont_descend }}
+{% endif %}
+{% if s.dos_filemode is defined and s.dos_filemode != '' %}
+{{ '  dos filemode = ' + s.dos_filemode }}
+{% endif %}
+{% if s.dos_filetime_resolution is defined and
+      s.dos_filetime_resolution in ['yes', 'no'] %}
+{{ '  dos filetime resolution = ' + s.dos_filetime_resolution }}
+{% endif %}
+{% if s.dos_filetimes is defined and s.dos_filetimes in ['yes', 'no'] %}
+{{ '  dos filetimes = ' + s.dos_filetimes }}
+{% endif %}
+{% if s.durable_handles is defined and
+      s.durable_handles in ['yes', 'no'] %}
+{{ '  durable handles = ' + s.durable_handles }}
+{% endif %}
+{% if s.ea_support is defined and s.ea_support in ['yes', 'no'] %}
+{{ '  ea support = ' + s.ea_support }}
+{% endif %}
+{% if s.fake_directory_create_times is defined and
+      s.fake_directory_create_times in ['yes', 'no'] %}
+{{ '  fake directory create times = ' + s.fake_directory_create_times }}
+{% endif %}
+{% if s.fake_oplocks is defined and s.fake_oplocks in ['yes', 'no'] %}
+{{ '  fake oplocks = ' + s.fake_oplocks }}
+{% endif %}
+{% if s.follow_symlinks is defined and
+      s.follow_symlinks in ['yes', 'no'] %}
+{{ '  follow symlinks = ' + s.follow_symlinks }}
+{% endif %}
+{% if s.force_create_mode is defined and
+      s.force_create_mode != '' %}
+{{ '  force create mode = ' ~ s.force_create_mode }}
+{% endif %}
+{% if s.force_directory_mode is defined and
+      s.force_directory_mode != '' %}
+{{ '  force directory mode = ' ~ s.force_directory_mode }}
+{% endif %}
+{% if s.force_group is defined and s.force_group != '' %}
+{{ '  force group = ' ~ s.force_group }}
+{% endif %}
+{% if s.force_printername is defined and
+      s.force_printername in ['yes', 'no'] %}
+{{ '  force group = ' ~ s.force_group }}
+{% endif %}
+{% if s.force_unknown_acl_user is defined and
+      s.force_unknown_acl_user in ['yes', 'no'] %}
+{{ '  force unknown acl user = ' ~ s.force_unknown_acl_user }}
+{% endif %}
+{% if s.force_user is defined and s.force_user != '' %}
+{{ '  force user = ' ~ s.force_user }}
+{% endif %}
+{% if s.fstype is defined and s.fstype != '' %}
+{{ '  force user = ' + s.fstype }}
+{% endif %}
+{% if s.guest_ok is defined and s.guest_ok in ['yes', 'no'] %}
+{{ '  guest ok = ' + s.guest_ok }}
+{% endif %}
+{% if s.guest_only is defined and s.guest_only in ['yes', 'no'] %}
+{{ '  guest only = ' + s.guest_only }}
+{% endif %}
+{% if s.hide_dot_files is defined and s.hide_dot_files in ['yes', 'no'] %}
+{{ '  hide dot files = ' + s.hide_dot_files }}
+{% endif %}
+{% if s.hide_files is defined and s.hide_files != '' %}
+{{ '  hide files = ' ~ s.hide_files }}
+{% endif %}
+{% if s.hide_new_files_timeout is defined and
+      s.hide_new_files_timeout != '' %}
+{{ '  hide new files timeout = ' ~ s.hide_new_files_timeout }}
+{% endif %}
+{% if s.hide_special_files is defined and
+      s.hide_special_files in ['yes', 'no'] %}
+{{ '  hide special files = ' + s.hide_special_files }}
+{% endif %}
+{% if s.hide_unreadable is defined and
+      s.hide_unreadable in ['yes', 'no'] %}
+{{ '  hide unreadable = ' + s.hide_unreadable }}
+{% endif %}
+{% if s.hide_unwriteable_files is defined and
+      s.hide_unwriteable_files in ['yes', 'no'] %}
+{{ '  hide unwriteable files = ' + s.hide_unwriteable_files }}
+{% endif %}
+{% if s.hosts_allow is defined and s.hosts_allow != '' %}
+{% if s.hosts_allow is string %}
+{{ '  hosts allow = ' + s.hosts_allow }}
+{% elif s.hosts_allow is sequence %}
+{{ '  hosts allow = ' + s.hosts_allow | join(' ') }}
+{% endif %}
+{% endif %}
+{% if s.hosts_deny is defined and s.hosts_deny != '' %}
+{{ '  hosts deny = ' + s.hosts_deny | join(' ') }}
+{% endif %}
+{% if s.inherit_acls is defined and s.inherit_acls in ['yes', 'no'] %}
+{{ '  inherit acls = ' + s.inherit_acls }}
+{% endif %}
+{% if s.inherit_owner is defined and
+      s.inherit_owner in ['yes', 'no', 'windows and unix', 'unix only'] %}
+{{ '  inherit owner = ' + s.inherit_owner }}
+{% endif %}
+{% if s.inherit_permissions is defined and
+      s.inherit_permissions in ['yes', 'no'] %}
+{{ '  inherit permissions = ' + s.inherit_permissions }}
+{% endif %}
+{% if s.invalid_users is defined and s.invalid_users != '' %}
+{{ '  invalid users = ' + s.invalid_users | join(' ') }}
+{% endif %}
+{% if s.kernel_oplocks is defined and s.kernel_oplocks in ['yes', 'no'] %}
+{{ '  kernel oplocks = ' + s.kernel_oplocks }}
+{% endif %}
+{% if s.kernel_share_modes is defined and
+      s.kernel_share_modes in ['yes', 'no'] %}
+{{ '  kernel share modes = ' + s.kernel_share_modes }}
+{% endif %}
+{% if s.level2_oplocks is defined and s.level2_oplocks in ['yes', 'no'] %}
+{{ '  level2 oplocks = ' + s.level2_oplocks }}
+{% endif %}
+{% if s.locking is defined and s.locking in ['yes', 'no'] %}
+{{ '  locking = ' + s.locking }}
+{% endif %}
+{% if s.lppause_command is defined and s.lppause_command != '' %}
+{{ '  lppause command = ' + s.lppause_command }}
+{% endif %}
+{% if s.lpq_command is defined and s.lpq_command != '' %}
+{{ '  lpq command = ' + s.lpq_command }}
+{% endif %}
+{% if s.lpresume_command is defined and s.lpresume_command != '' %}
+{{ '  lpresume command = ' + s.lpresume_command }}
+{% endif %}
+{% if s.lprm_command is defined and s.lprm_command != '' %}
+{{ '  lprm command = ' + s.lprm_command }}
+{% endif %}
+{% if s.magic_output is defined and s.magic_output != '' %}
+{{ '  magic output = ' + s.magic_output }}
+{% endif %}
+{% if s.magic_script is defined and s.magic_script != '' %}
+{{ '  magic script = ' + s.magic_script }}
+{% endif %}
+{% if s.mangled_names is defined and
+      s.mangled_names in ['yes', 'no', 'illegal'] %}
+{{ '  mangled names = ' + s.mangled_names }}
+{% endif %}
+{% if s.mangling_char is defined and s.mangling_char != '' %}
+{{ '  mangled char = ' + s.mangling_char }}
+{% endif %}
+{% if s.map_acl_inherit is defined and
+      s.map_acl_inherit in ['yes', 'no'] %}
+{{ '  map acl inherit = ' + s.map_acl_inherit }}
+{% endif %}
+{% if s.map_archive is defined and s.map_archive in ['yes', 'no'] %}
+{{ '  map archive = ' + s.map_archive }}
+{% endif %}
+{% if s.map_hidden is defined and s.map_hidden in ['yes', 'no'] %}
+{{ '  map hidden = ' + s.map_hidden }}
+{% endif %}
+{% if s.map_readonly is defined and
+      s.map_readonly in ['yes', 'no', 'permissions'] %}
+{{ '  map readonly = ' + s.map_readonly }}
+{% endif %}
+{% if s.map_system is defined and
+      s.map_system in ['yes', 'no', 'permissions'] %}
+{{ '  map system = ' + s.map_system }}
+{% endif %}
+{% if s.max_connections is defined and s.max_connections != '' %}
+{{ '  max connections = ' ~ s.max_connections }}
+{% endif %}
+{% if s.max_print_jobs is defined and s.max_print_jobs != '' %}
+{{ '  max print jobs = ' ~ s.max_print_jobs }}
+{% endif %}
+{% if s.max_reported_print_jobs is defined and
+      s.max_reported_print_jobs != '' %}
+{{ '  max reported print jobs = ' ~ s.max_reported_print_jobs }}
+{% endif %}
+{% if s.min_print_space is defined and s.min_print_space != '' %}
+{{ '  min print space = ' ~ s.min_print_space }}
+{% endif %}
+{% if s.msdfs_proxy is defined and s.msdfs_proxy != '' %}
+{{ '  msdfs proxy = ' ~ s.msdfs_proxy }}
+{% endif %}
+{% if s.msdfs_root is defined and s.msdfs_root in ['yes', 'no'] %}
+{{ '  msdfs root = ' + s.msdfs_root }}
+{% endif %}
+{% if s.msdfs_shuffle_referrals is defined and
+      s.msdfs_shuffle_referrals in ['yes', 'no'] %}
+{{ '  msdfs shuffle referrals = ' + s.msdfs_shuffle_referrals }}
+{% endif %}
+{% if s.nt_acl_support is defined and s.nt_acl_support in ['yes', 'no'] %}
+{{ '  nt acl support = ' + s.nt_acl_support }}
+{% endif %}
+{% if s.ntvfs_handler is defined and s.ntvfs_handler != '' %}
+{{ '  ntvfs handler = ' + s.ntvfs_handler | join(', ') }}
+{% endif %}
+{% if s.oplocks is defined and s.oplocks in ['yes', 'no'] %}
+{{ '  oplocks = ' + s.oplocks }}
+{% endif %}
+{% if s.path is defined and s.path != '' %}
+{{ '  path = ' + s.path }}
+{% endif %}
+{% if s.posix_locking is defined and s.posix_locking in ['yes', 'no'] %}
+{{ '  posix locking = ' + s.posix_locking }}
+{% endif %}
+{% if s.postexec is defined and s.postexec != '' %}
+{{ '  postexec = ' + s.postexec }}
+{% endif %}
+{% if s.preexec_close is defined and s.preexec_close in ['yes', 'no'] %}
+{{ '  preexec close = ' + s.preexec_close }}
+{% endif %}
+{% if s.preserve_case is defined and s.preserve_case in ['yes', 'no'] %}
+{{ '  preserve case = ' + s.preserve_case }}
+{% endif %}
+{% if s.printable is defined and s.printable in ['yes', 'no'] %}
+{{ '  printable = ' + s.printable }}
+{% endif %}
+{% if s.print_command is defined and s.print_command != '' %}
+{{ '  print command = ' + s.print_command }}
+{% endif %}
+{% if s.printer_name is defined and s.printer_name != '' %}
+{{ '  printer name = ' + s.printer_name }}
+{% endif %}
+{% if s.printing is defined and s.printing != '' %}
+{{ '  printing = ' + s.printing }}
+{% endif %}
+{% if s.printjob_username is defined and s.printjob_username != '' %}
+{{ '  printjob username = ' + s.printjob_username }}
+{% endif %}
+{% if s.print_notify_backchannel is defined and
+      s.print_notify_backchannel in ['yes', 'no'] %}
+{{ '  print notify backchannel = ' + s.print_notify_backchannel }}
+{% endif %}
+{% if s.queuepause_command is defined and s.queuepause_command != '' %}
+{{ '  queuepause command = ' + s.queuepause_command }}
+{% endif %}
+{% if s.queueresume_command is defined and s.queueresume_command != '' %}
+{{ '  queueresume command = ' + s.queueresume_command }}
+{% endif %}
+{% if s.read_list is defined and s.read_list != '' %}
+{{ '  read list = ' + s.read_list | join(', ') }}
+{% endif %}
+{% if s.read_only is defined and s.read_only in ['yes', 'no'] %}
+{{ '  read only = ' + s.read_only }}
+{% endif %}
+{% if s.root_postexec is defined and s.root_postexec != '' %}
+{{ '  root postexec = ' + s.root_postexec }}
+{% endif %}
+{% if s.root_preexec is defined and s.root_preexec != '' %}
+{{ '  root preexec = ' + s.root_preexec }}
+{% endif %}
+{% if s.root_preexec_close is defined and
+      s.root_preexec_close in ['yes', 'no'] %}
+{{ '  root preexec close = ' + s.root_preexec_close }}
+{% endif %}
+{% if s.short_preserve_case is defined and
+      s.short_preserve_case in ['yes', 'no'] %}
+{{ '  short preserve case = ' + s.short_preserve_case }}
+{% endif %}
+{% if s.smbd_async_dosmode is defined and
+      s.smbd_async_dosmode in ['yes', 'no'] %}
+{{ '  smbd async dosmode = ' + s.smbd_async_dosmode }}
+{% endif %}
+{% if s.smbd_getinfo_ask_sharemode is defined and
+      s.smbd_getinfo_ask_sharemode in ['yes', 'no'] %}
+{{ '  smbd getinfo ask sharemode = ' + s.smbd_getinfo_ask_sharemode }}
+{% endif %}
+{% if s.smbd_max_async_dosmode is defined and
+      s.smbd_max_async_dosmode != '' %}
+{{ '  smbd max async dosmode = ' + s.smbd_max_async_dosmode }}
+{% endif %}
+{% if s.smbd_search_ask_sharemode is defined and
+      s.smbd_search_ask_sharemode in ['yes', 'no'] %}
+{{ '  smbd search ask sharemode = ' + s.smbd_search_ask_sharemode }}
+{% endif %}
+{% if s.smb_encrypt is defined and
+      s.smb_encrypt in ['off', 'disabled', 'enabled', 'auto', 'if_required',
+                           'desired','required', 'mandatory'] %}
+{{ '  smb encrypt = ' + s.smb_encrypt }}
+{% endif %}
+{% if s.spotlight is defined and s.spotlight in ['yes', 'no'] %}
+{{ '  spotlight = ' + s.spotlight }}
+{% endif %}
+{% if s.store_dos_attributes is defined and
+      s.store_dos_attributes in ['yes', 'no'] %}
+{{ '  store dos attributes = ' + s.store_dos_attributes }}
+{% endif %}
+{% if s.strict_allocate is defined and
+      s.strict_allocate in ['yes', 'no'] %}
+{{ '  strict allocate = ' + s.strict_allocate }}
+{% endif %}
+{% if s.strict_locking is defined and
+      s.strict_locking in ['yes', 'no', 'auto'] %}
+{{ '  strict locking = ' + s.strict_allocate }}
+{% endif %}
+{% if s.strict_rename is defined and s.strict_rename in ['yes', 'no'] %}
+{{ '  strict rename = ' + s.strict_rename }}
+{% endif %}
+{% if s.strict_sync is defined and s.strict_sync in ['yes', 'no'] %}
+{{ '  strict sync = ' + s.strict_sync }}
+{% endif %}
+{% if s.sync_always is defined and s.sync_always in ['yes', 'no'] %}
+{{ '  sync always = ' + s.sync_always }}
+{% endif %}
+{% if s.use_client_driver is defined and
+      s.use_client_driver in ['yes', 'no'] %}
+{{ '  use client driver = ' + s.use_client_driver }}
+{% endif %}
+{% if s.use_sendfile is defined and s.use_sendfile in ['yes', 'no'] %}
+{{ '  use sendfile = ' + s.use_sendfile }}
+{% endif %}
+{% if s.valid_users is defined and s.valid_users != '' %}
+{% if s.valid_users is string %}
+{{ '  valid users = ' + s.valid_users }}
+{% elif s.valid_users is sequence %}
+{% for vu in s.valid_users %}
+{% if loop.first %}
+{{ '  valid users =' -}}
+{% endif %}
+{{ ' \"' + vu + '\"' -}}
+{% if loop.last %}
+{{ ' ' }}
+{% endif %}
+{% endfor %}
+{% endif %}
+{% endif %}
+{% if s.veto_files is defined and s.veto_files != '' %}
+{{ '  veto files = ' + s.veto_files }}
+{% endif %}
+{% if s.veto_oplock_files is defined and s.veto_oplock_files != '' %}
+{{ '  veto oplock files = ' + s.veto_oplock_files }}
+{% endif %}
+{% if s.vfs_objects is defined and s.vfs_objects != '' %}
+{% if s.vfs_objects is string %}
+{{ '  vfs objects = ' + s.vfs_objects }}
+{% elif s.vfs_objects is sequence %}
+{{ '  vfs objects = ' + s.vfs_objects | join(' ') }}
+{% endif %}
+{% endif %}
+{% if s.volume is defined and s.volume != '' %}
+{{ '  volume = ' + s.volume }}
+{% endif %}
+{% if s.wide_links is defined and s.wide_links in ['yes', 'no'] %}
+{{ '  wide links = ' + s.wide_links }}
+{% endif %}
+{% if s.writeable is defined and s.writeable in ['yes', 'no'] %}
+{{ '  writeable = ' + s.writeable }}
+{% endif %}
+{% if s.write_cache_size is defined and s.write_cache_size != '' %}
+{{ '  write cache size = ' ~ s.write_cache_size }}
+{% endif %}
+{% if s.write_list is defined and s.write_list != '' %}
+{% if s.write_list is string %}
+{{ '  write list = ' + s.write_list }}
+{% elif s.write_list is sequence %}
+{% for wl in s.write_list %}
+{% if loop.first %}
+{{ '  write list =' -}}
+{% endif %}
+{{ ' \"' + wl + '\"' -}}
+{% if loop.last %}
+{{ ' ' }}
+{% endif %}
+{% endfor %}
+{% endif %}
+{% endif %}

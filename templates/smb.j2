@@ -1,0 +1,20 @@
+{{ '## ' + 'smb.conf' }}
+{{ '# ' + ansible_managed }}
+{{ '# ' + 'Do not edit manually' }}
+
+{% if vars['samba_smb_global_settings'] is defined and
+      vars['samba_smb_global_settings'] != '' %}
+{% for g in vars['samba_smb_global_settings'] %}
+{% include 'smb_global.j2' %}
+{% endfor %}
+{% endif %}
+{% if vars['samba_smb_shares_settings'] is defined and
+      vars['samba_smb_shares_settings'] != '' %}
+{% for s in vars['samba_smb_shares_settings'] %}
+{{ '[' ~ s.name ~ ']' }}
+{% include 'smb_share.j2' %}
+{% include 'smb_vfs_acl_xattr.j2' %}
+{% include 'smb_vfs_ceph.j2' %}
+{% include 'smb_vfs_ceph_snapshots.j2' %}
+{% endfor %}
+{% endif %}

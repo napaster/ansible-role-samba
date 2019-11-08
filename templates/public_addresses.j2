@@ -1,0 +1,15 @@
+{{ '## ' + 'public_addresses' }}
+{{ '# ' + ansible_managed }}
+{{ '# ' + 'Do not edit manually' }}
+
+{% for e in vars['samba_ctdb_public_address'] %}
+{% if e.address | ipaddr('host') %}
+{{ e.address -}}
+{% if e.iface is defined and e.iface != '' %}
+{{ ' ' ~ e.iface -}}
+{% endif %}
+{% endif %}
+{% if not loop.last %}
+{{ '' }}
+{% endif %}
+{% endfor %}

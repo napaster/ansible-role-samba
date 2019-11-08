@@ -1,0 +1,6 @@
+{% if s.ceph_config_file is defined and s.ceph_config_file != '' %}
+{{ '  ceph: config_file = ' + s.ceph_config_file }}
+{% endif %}
+{% if s.ceph_user_id is defined and s.ceph_user_id != '' %}
+{{ '  ceph: user_id = ' + s.ceph_user_id }}
+{% endif %}

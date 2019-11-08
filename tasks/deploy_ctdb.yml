@@ -1,0 +1,67 @@
+---
+- name: samba | Deploy CTDB configuration
+  template:
+    src: "ctdb.j2"
+    dest: "{{ hostvars[inventory_hostname]['samba_ctdb_conf_dest'] + '/' +
+              'ctdb.conf' }}"
+    owner: "root"
+    group: "root"
+    mode: "0644"
+  notify:
+  - "Restart ctdb"
+  when:
+  - "vars['samba_ctdb_settings'] is defined"
+  - "vars['samba_ctdb_settings'] != []"
+- name: samba | Deploy CTDB nodes
+  template:
+    src: "nodes.j2"
+    dest: "{{ hostvars[inventory_hostname]['samba_ctdb_conf_dest'] + '/' +
+              'nodes' }}"
+    owner: "root"
+    group: "root"
+    mode: "0644"
+  notify:
+  - "Restart ctdb"
+  when:
+  - "vars['samba_ctdb_private_address'] is defined"
+  - "vars['samba_ctdb_private_address'] != []"
+- name: samba | Deploy CTDB public addresses
+  template:
+    src: "public_addresses.j2"
+    dest: "{{ hostvars[inventory_hostname]['samba_ctdb_conf_dest'] + '/' +
+              'public_addresses' }}"
+    owner: "root"
+    group: "root"
+    mode: "0644"
+  notify:
+  - "Restart ctdb"
+  when:
+  - "vars['samba_ctdb_public_address'] is defined"
+  - "vars['samba_ctdb_public_address'] != []"
+- name: samba | Deploy CTDB script options
+  template:
+    src: "script_options.j2"
+    dest: "{{ hostvars[inventory_hostname]['samba_ctdb_conf_dest'] + '/' +
+              'script.options' }}"
+    owner: "root"
+    group: "root"
+    mode: "0644"
+  notify:
+  - "Restart ctdb"
+  when:
+  - "vars['samba_ctdb_script_options'] is defined"
+  - "vars['samba_ctdb_script_options'] != []"
+- name: samba | Enable ctdb service
+  systemd:
+    name: "{{ hostvars[inventory_hostname]['samba_ctdb_service'] }}"
+    enabled: "yes"
+  when:
+  - "(hostvars[inventory_hostname]['samba'] is defined and
+      hostvars[inventory_hostname]['samba'] != '' and
+      hostvars[inventory_hostname]['samba'] |
+      json_query(vars['samba_ctdb_enable']) is defined and
+      hostvars[inventory_hostname]['samba'] |
+      json_query(vars['samba_ctdb_enable']) == 'true')"
+  - "vars['samba_mode'] == 'cluster'"
+  vars:
+    samba_ctdb_enable: "[] | map(&enable || 'false', @) | [0]"
