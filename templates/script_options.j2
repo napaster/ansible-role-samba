@@ -1,7 +1,3 @@
-{{ '## ' + 'public_addresses' }}
-{{ '# ' + ansible_managed }}
-{{ '# ' + 'Do not edit manually' }}
-
 {% for e in vars['samba_ctdb_script_options'] %}
 {% if e.ctdb_partially_online_interfaces is defined and
       e.ctdb_partially_online_interfaces in ['true', 'false'] %}

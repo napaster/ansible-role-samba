@@ -1,7 +1,3 @@
-{{ '## ' + 'nodes' }}
-{{ '# ' + ansible_managed }}
-{{ '# ' + 'Do not edit manually' }}
-
 {% for addr in vars['samba_ctdb_private_address'] %}
 {% if addr | ipaddr('host') %}
 {{ addr }}
