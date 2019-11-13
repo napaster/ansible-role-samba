@@ -9,7 +9,9 @@
     mode: "0644"
     validate: "testparm %s"
   when:
-  - "vars['samba_ctdb_service_facts'] == 'started'"
+  - "vars['samba_mode'] == 'standalone' or
+     (vars['samba_mode'] == 'cluster' and
+     vars['samba_ctdb_service_facts'] == 'running')"
   notify:
   - "Reload smb"
   - "Reload nmb"
@@ -24,7 +26,8 @@
     group: "root"
     mode: "0644"
   when:
-  - "vars['samba_ctdb_service_facts'] != 'started'"
+  - "vars['samba_mode'] == 'cluster'"
+  - "vars['samba_ctdb_service_facts'] != 'running'"
   notify:
   - "Reload smb"
   - "Reload nmb"
