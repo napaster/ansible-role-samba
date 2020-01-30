@@ -9,10 +9,6 @@ versions of Microsoft Windows operating systems.
 * Ansible 2.8+;
 * Samba 4.8+;
 
-## Extra
-
-
-
 ## Example configuration
 
 ```yaml
