@@ -292,9 +292,6 @@
 {% if g.enable_spoolss is defined and g.enable_spoolss in ['yes', 'no'] %}
 {{ '  enable spoolss = ' + g.enable_spoolss }}
 {% endif %}
-{% if g.encrypt_passwords is defined and g.encrypt_passwords in ['yes', 'no'] %}
-{{ '  encrypt passwords = ' + g.encrypt_passwords }}
-{% endif %}
 {% if g.enhanced_browsing is defined and g.enhanced_browsing in ['yes', 'no'] %}
 {{ '  enhanced browsing = ' + g.enhanced_browsing }}
 {% endif %}

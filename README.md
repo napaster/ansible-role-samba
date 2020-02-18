@@ -945,21 +945,6 @@ samba:
       enable_privileges: 'yes'
 # Inverted synonym for 'disable_spoolss'.
       enable_spoolss: 'yes'
-# This boolean controls whether encrypted passwords will be negotiated with the
-# client. Note that Windows NT 4.0 SP3 and above and also Windows 98 will by
-# default expect encrypted passwords unless a registry entry is changed. To use
-# encrypted passwords in Samba see the chapter "User Database" in the Samba
-# HOWTO Collection. MS Windows clients that expect Microsoft encrypted passwords
-# and that do not have plain text password support enabled will be able to
-# connect only to a Samba server that has encrypted password support enabled
-# and for which the user accounts have a valid encrypted password. The use of
-# plain text passwords is NOT advised as support for this feature is no longer
-# maintained in Microsoft Windows products. If you want to use plain text
-# passwords you must set this parameter to no. In order for encrypted passwords
-# to work correctly smbd must either have access to a local smbpasswd file or
-# set the 'security' in [domain|ads] parameter which causes smbd to authenticate
-# against another server. Default is 'yes'.
-      encrypt_passwords: 'yes'
 # This option enables a couple of enhancements to cross-subnet browse
 # propagation that have been added in Samba but which are not standard in
 # Microsoft implementations. The first enhancement to browse propagation
@@ -4223,4 +4208,254 @@ samba:
       - 'admin'
       - 'root'
       - '@staff'
+# vfs_recycle - Samba VFS recycle bin.
+# The vfs_recycle intercepts file deletion requests and moves the affected
+# files to a temporary repository rather than deleting them immediately. This
+# gives the same effect as the Recycle Bin on Windows computers. The Recycle
+# Bin will not appear in Windows Explorer views of the network file system
+# (share) nor on any mapped drive. Instead, a directory called .recycle will be
+# automatically created when the first file is deleted and 'recycle_repository'
+# is not configured. If 'recycle_repository' is configured, the name of the
+# created directory depends on 'recycle_repository'. Users can recover files
+# from the recycle bin. If the 'recycle_keeptree' option has been specified,
+# deleted files will be found in a path identical with that from which the file
+# was deleted.
+#
+# Path of the directory where deleted files should be moved. If this option is
+# not set, the default path '.recycle' is used.
+      recycle_repository: '.recycle'
+# Set the octal mode the recycle repository should be created with. The recycle
+# repository will be created when first file is deleted. If
+# 'recycle_subdir_mode' is not set, mode also applies to subdirectories. If this
+# option is not set, the default mode '0700' is used.
+      recycle_directory_mode: '0700'
+# Set the octal mode with which sub directories of the recycle repository
+# should be created. If this option is not set, subdirectories will be created
+# with the mode from 'recycle_directory_mode'.
+      recycle_subdir_mode: ''
+# Specifies whether the directory structure should be preserved or whether the
+# files in a directory that is being deleted should be kept separately in the
+# repository.
+      recycle_keeptree: ''
+# If this option is 'true', two files with the same name that are deleted will
+# both be kept in the repository. Newer deleted versions of a file will be
+# called "Copy #x of filename".
+      recycle_versions: ''
+# Specifies whether a file's access date should be updated when the file is
+# moved to the repository.
+      recycle_touch: ''
+# Specifies whether a file's last modified date should be updated when the
+# file is moved to the repository.
+      recycle_touch_mtime: ''
+# vfs_full_audit - record Samba VFS operations in the system log.
+# The vfs_full_audit VFS module records selected client operations to the
+# system log using syslog. vfs_full_audit is able to record the complete set of
+# Samba VFS operations:
+# 'chdir', 'chflags', 'chmod', 'chown', 'close', 'closedir', 'connect',
+# 'copy_chunk_send', 'copy_chunk_recv', 'disconnect', 'disk_free', 'fchmod',
+# 'fchown', 'fget_nt_acl', 'fgetxattr', 'flistxattr', 'fremovexattr',
+# 'fset_nt_acl', 'fsetxattr', 'fstat', 'fsync', 'ftruncate', 'get_compression',
+# 'get_nt_acl', 'get_quota', 'get_shadow_copy_data', 'getlock', 'getwd',
+# 'getxattr', 'kernel_flock', 'link', 'linux_setlease', 'listxattr', 'lock',
+# 'lseek', 'lstat', 'mkdir', 'mknod', 'open', 'opendir', 'pread', 'pwrite',
+# 'read', 'readdir', 'readlink', 'realpath', 'removexattr', 'rename',
+# 'rewinddir', 'rmdir', 'seekdir', 'sendfile', 'set_compression', 'set_nt_acl',
+# 'set_quota', 'setxattr', 'snap_check_path', 'snap_create', 'snap_delete',
+# 'stat', 'statvfs', 'symlink', 'sys_acl_delete_def_file', 'sys_acl_get_fd',
+# 'sys_acl_get_file', 'sys_acl_set_fd', 'sys_acl_set_file', 'telldir', 'unlink',
+# 'utime', 'write'.
+# In addition to these operations, vfs_full_audit recognizes the special
+# operation names 'all' and 'none', which refer to all the VFS operations and
+# none of the VFS operations respectively. vfs_full_audit records operations in
+# fixed format consisting of fields separated by '|' characters.
+# The format is: 'PREFIX|OPERATION|RESULT|FILE'.
+# The record fields are:
+# PREFIX - the result of the 'full_audit_prefix' string after variable
+# substitutions.
+# OPERATION - the name of the VFS operation.
+# RESULT - whether the operation succeeded or failed.
+# FILE - the name of the file or directory the operation was performed on.
+#
+# Prepend audit messages with STRING. STRING is processed for standard
+# substitution variables listed in smb.conf. The default prefix is '%u|%I' (this
+# mean username and ipaddress).
+      full_audit_prefix: '%u|%I'
+# Is a list of VFS operations that should be recorded if they succeed.
+# Operations are specified using the names listed above. Operations can be
+# unset by prefixing the names with "!". The default is none operations.
+      full_audit_success: 'open opendir'
+# Is a list of VFS operations that should be recorded if they failed. Operations
+# are specified using the names listed above. Operations can be unset by
+# prefixing the names with "!". The default is none operations.
+      full_audit_failure: 'all !open'
+# Log messages to the named syslog facility.
+      full_audit_facility: 'LOCAL7'
+# Log messages with the named syslog priority.
+      full_audit_priority: 'ALERT'
+# Log messages to syslog (default) or as a debug level 1 message.
+      full_audit_syslog: 'true'
+# Log an sddl form of the security descriptor coming in when a client sets an
+# acl. Defaults to false.
+      full_audit_log_secdes: 'true'
+# vfs_shadow_copy2 - Expose snapshots to Windows clients as shadow copies.
+# The vfs_shadow_copy2 VFS module offers a functionality similar to Microsoft
+# Shadow Copy services. When set up properly, this module allows Microsoft
+# Shadow Copy clients to browse through file system snapshots as
+# "shadow copies" on Samba shares. This is a second implementation of a shadow
+# copy module which has the following additional features (compared to the
+# original vfs_shadow_copy module):
+# 1. There is no need any more to populate your share's root directory with
+# symlinks to the snapshots if the file system stores the snapshots elsewhere.
+# Instead, you can flexibly configure the module where to look for the file
+# system snapshots. This can be very important when you have thousands of
+# shares, or use [homes].
+# 2. Snapshot directories need not be in one fixed central place but can be
+# located anywhere in the directory tree. This mode helps to support file
+# systems that offer snapshotting of particular subtrees, for example the GPFS
+# independent file sets.
+# 3. Vanity naming for snapshots: snapshots can be named in any format
+# compatible with str[fp]time conversions.
+# 4. Timestamps can be represented in localtime rather than UTC.
+# 5. The inode number of the files can optionally be altered to be different
+# from the original. This fixes the 'restore' button in the Windows GUI to work
+# without a sharing violation when serving from file systems, like GPFS, that
+# return the same device and inode number for the snapshot file and the
+# original.
+# 6. Shadow copy results are by default sorted before being sent to the client.
+# This is beneficial for filesystems that don't read directories alphabetically
+# (the default unix). Sort ordering can be configured and sorting can be turned
+# off completely if the file system sorts its directory listing.
+# vfs_shadow_copy2 relies on a filesystem snapshot implementation. Many common
+# filesystems have native support for this.
+# Filesystem snapshots must be available under specially named directories in
+# order to be recognized by vfs_shadow_copy2. These snapshot directory is
+# typically a direct subdirectory of the share root's mountpoint but there are
+# other modes that can be configured with the parameters described in detail
+# below. The snapshot at a given point in time is expected in a subdirectory of
+# the snapshot directory where the snapshot's directory is expected to be a
+# formatted version of the snapshot time. The default format which can be
+# changed with the shadow:format option is @GMT-YYYY.MM.DD-hh.mm.ss, where:
+# YYYY is the 4 digit year
+# MM is the 2 digit month
+# DD is the 2 digit day
+# hh is the 2 digit hour
+# mm is the 2 digit minute
+# ss is the 2 digit second.
+# The vfs_shadow_copy2 snapshot naming convention can be produced with the
+# following date command: TZ=GMT date +@GMT-%Y.%m.%d-%H.%M.%S
+#
+# With this parameter, one can specify the mount point of the filesystem that
+# contains the share path. Usually this mount point is automatically detected.
+# But for some constellations, in particular tests, it can be convenient to be
+# able to specify it. Default is empty.
+      shadow_mountpoint: '/path/to/filesystem'
+# Path to the directory where the file system of the share keeps its snapshots.
+# If an absolute path is specified, it is used as-is. If a relative path is
+# specified, then it is taken relative to the mount point of the filesystem of
+# the share root.
+# Note that 'shadow_snapdirseverywhere' depends on this parameter and needs a
+# relative path. Setting an absolute path disables 'shadow_snapdirseverywhere'.
+# Note that the 'shadow_crossmountpoints' option also requires a relative
+# snapdir. Setting an absolute path disables 'shadow_crossmountpoints'.
+# Default is '.snapshots'.
+      shadow_snapdir: '/some/absolute/path'
+# The basedir option allows one to specify a directory between the share's
+# mount point and the share root, relative to which the file system's snapshots
+# are taken. For example, if
+# basedir = mountpoint/rel_basedir
+# share_root = basedir/rel_share_root
+# snapshot_path = mountpoint/snapdir
+# or snapshot_path = snapdir if snapdir is absolute,
+# then the snapshot of a file = mountpoint/rel_basedir/rel_share_root/rel_file
+# at a time TIME will be found under
+# snapshot_path/FS_GMT_TOKEN(TIME)/rel_share_root/rel_file, where
+# FS_GMT_TOKEN(TIME) is the timestamp string belonging to TIME in the format
+# required by the file system. See shadow_format.
+# The default for the basedir is the mount point of the file system of the
+# share root (see 'shadow_mountpoint').
+# Note that the 'shadow_snapdirseverywhere' and 'shadow_crossmountpoints'
+# options are incompatible with 'shadow_basedir' and disable the basedir
+# setting.
+      shadow_basedir: ''
+# With this parameter, one can specify the path of the share's root directory
+# in snapshots, relative to the snapshot's root directory. It is an alternative
+# method to 'shadow_basedir', allowing greater control. For example, if within
+# each snapshot the files of the share have a path/to/share/ prefix, then
+# 'shadow_snapsharepath' can be set to path/to/share.
+# With this parameter, it is no longer assumed that a snapshot represents an
+# image of the original file system or a portion of it. For example, a system
+# could perform backups of only files contained in shares, and then expose the
+# backup files in a logical structure:
+# share1/
+# share2/
+# .../
+# Note that the 'shadow_snapdirseverywhere' and the 'shadow_basedir' options
+# are incompatible with 'shadow_snapsharepath' and disable
+# 'shadow_snapsharepath' setting. Default is empty.
+      shadow_snapsharepath: 'path/to/share'
+# By default, this module sorts the shadow copy data alphabetically before
+# sending it to the client. With this parameter, one can specify the sort order.
+# Possible known values are 'desc' (descending, the default) and 'asc'
+# (ascending). If the file system lists directories alphabetically sorted, one
+# can turn off sorting in this module by specifying any other value.
+      shadow_sort: 'desc'
+# This is an optional parameter that indicates whether the snapshot names are
+# in UTC/GMT or in local time. If it is disabled then UTC/GMT is expected.
+      shadow_localtime: 'no'
+# Format specification for snapshot names. This is an optional parameter that
+# specifies the format specification for the naming of snapshots in the file
+# system. The format must be compatible with the conversion specifications
+# recognized by str[fp]time. Default is '@GMT-%Y.%m.%d-%H.%M.%S'.
+      shadow_format: ''
+# This parameter can be used to specify that the time in format string is given
+# as an unsigned long integer (%lu) rather than a time strptime() can parse.
+# The result must be a unix time_t time. Default is 'no'.
+      shadow_sscanf: 'no'
+# If you enable 'shadow_fixinodes' then this module will modify the apparent
+# inode number of files in the snapshot directories using a hash of the files
+# path. This is needed for snapshot systems where the snapshots have the same
+# device:inode number as the original files (such as happens with GPFS
+# snapshots). If you don't set this option then the 'restore' button in the
+# shadow copy UI will fail with a sharing violation. Default is 'no'.
+      shadow_fixinodes: 'no'
+# If you enable 'shadow_snapdirseverywhere' then this module will look out for
+# snapshot directories in the current working directory and all parent
+# directories, stopping at the mount point by default. But see
+# 'shadow_crossmountpoints' how to change that behaviour. An example where this
+# is needed are independent filesets in IBM's GPFS, but other filesystems might
+# support snapshotting only particular subtrees of the filesystem as well.
+# Note that 'shadow_snapdirseverywhere' depends on 'shadow_snapdir' and needs
+# it to be a relative path. Setting an absolute snapdir path disables
+# 'shadow_snapdirseverywhere'. Note that this option is incompatible with the
+# 'shadow_basedir' option and removes the 'shadow_basedir' setting by itself.
+# Default is 'no'.
+      shadow_snapdirseverywhere: 'no'
+# This option is effective in the case of 'shadow_snapdirseverywhere' in 'yes'.
+# Setting this option makes the module not stop at the first mount point
+# encountered when looking for snapdirs, but lets it search potentially all
+# through the path instead. An example where this is needed are independent
+# filesets in IBM's GPFS, but other filesystems might support snapshotting only
+# particular subtrees of the filesystem as well. Note that
+# 'shadow_crossmountpoints' depends on 'shadow_snapdir' and needs it to be a
+# relative path. Setting an absolute snapdir path disables
+# 'shadow_crossmountpoints'. Note that this option is incompatible with the
+# 'shadow:basedir' option and removes the 'shadow:basedir' setting by itself.
+# Default is 'no'.
+      shadow_crossmountpoints: 'no'
+# With growing number of snapshots file-systems need some mechanism to
+# differentiate one set of snapshots from other, e.g. monthly, weekly, manual,
+# special events, etc. Therefore these file-systems provide different ways to
+# tag snapshots, e.g. provide a configurable way to name snapshots, which is
+# not just based on time. With only 'shadow_format' it is very difficult to
+# filter these snapshots. With this optional parameter, one can specify a
+# variable prefix component for names of the snapshot directories in the
+# file-system. If this parameter is set, together with the shadow_format and
+# shadow_delimiter parameters it determines the possible names of snapshot
+# directories in the file-system. The option only supports Basic Regular
+# Expression (BRE).
+      shadow_snapprefix: ''
+# This optional parameter is used as a delimiter between 'shadow_snapprefix'
+# and 'shadow_format'. This parameter is used only when 'shadow_snapprefix' is
+# set. Default is '_GMT'.
+      shadow_delimiter: ''
 ```

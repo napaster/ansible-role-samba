@@ -14,6 +14,9 @@
 {{ '[' ~ s.name ~ ']' }}
 {% include 'smb_share.j2' %}
 {% include 'smb_vfs_acl_xattr.j2' %}
+{% include 'smb_vfs_recycle.j2' %}
+{% include 'smb_vfs_full_audit.j2' %}
+{% include 'smb_vfs_shadow_copy2.j2' %}
 {% include 'smb_vfs_ceph.j2' %}
 {% include 'smb_vfs_ceph_snapshots.j2' %}
 {% endfor %}
