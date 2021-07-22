@@ -7,7 +7,7 @@
     owner: "root"
     group: "root"
     mode: "0644"
-    validate: "testparm %s"
+    validate: "testparm -s %s"
   when:
   - "vars['samba_mode'] == 'standalone' or
      (vars['samba_mode'] == 'cluster' and
