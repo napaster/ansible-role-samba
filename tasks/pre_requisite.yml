@@ -1,45 +1,56 @@
 ---
-- name: samba | Add the OS specific variables
-  include_vars: "{{ hostvars[inventory_hostname]['ansible_os_family'] +
-                    '.yml' }}"
-- name: samba | Set facts about samba role
-  set_fact:
+- name: "samba | Add the OS specific variables"
+  ansible.builtin.include_vars:
+    file: "{{ hostvars[inventory_hostname]['ansible_os_family'] + '.yml' }}"
+- name: "samba | Set facts about samba role"
+  ansible.builtin.set_fact:
+    samba_package_state: "{{ hostvars[inventory_hostname]['samba'] |
+      community.general.json_query('[].package_state | [0]') }}"
     samba_mode: "{{ hostvars[inventory_hostname]['samba'] |
-      json_query('[].mode[] | [0]') }}"
+      community.general.json_query('[].mode[] | [0]') }}"
     samba_smb_global_settings: "{{ hostvars[inventory_hostname]['samba'] |
-      json_query('[].smb[].global[]') }}"
+      community.general.json_query('[].smb[].global[]') }}"
     samba_smb_shares_settings: "{{ hostvars[inventory_hostname]['samba'] |
-      json_query('[].smb[].shares[]') }}"
+      community.general.json_query('[].smb[].shares[]') }}"
     samba_ctdb_settings: "{{ hostvars[inventory_hostname]['samba'] |
-      json_query('[].ctdb[].settings[]') }}"
+      community.general.json_query('[].ctdb[].settings[]') }}"
     samba_ctdb_private_address: "{{ hostvars[inventory_hostname]['samba'] |
-      json_query('[].ctdb[].private_address[]') }}"
+      community.general.json_query('[].ctdb[].private_address[]') }}"
     samba_ctdb_public_address: "{{ hostvars[inventory_hostname]['samba'] |
-      json_query('[].ctdb[].public_address[]') }}"
+      community.general.json_query('[].ctdb[].public_address[]') }}"
     samba_ctdb_script_options: "{{ hostvars[inventory_hostname]['samba'] |
-      json_query('[].ctdb[].script_options[]') }}"
-- name: samba | Assert samba mode
-  assert:
+      community.general.json_query('[].ctdb[].script_options[]') }}"
+- name: "samba | Assert that package state in valid value"
+  ansible.builtin.assert:
     that:
-    - "vars['samba_mode'] is defined"
-    - "vars['samba_mode'] in ['standalone', 'cluster']"
+      - "vars['samba_package_state'] in ['present', 'latest']"
+    msg: "'package_state' must be in 'present' or 'latest'."
+    quiet: "true"
+  when:
+    - "vars['samba_package_state'] is defined"
+    - "vars['samba_package_state'] != ''"
+- name: "samba | Assert samba mode"
+  ansible.builtin.assert:
+    that:
+      - "vars['samba_mode'] is defined"
+      - "vars['samba_mode'] in ['standalone', 'cluster']"
     msg: "Samba mode not in ['standalone', 'cluster'] or not defined."
     quiet: "true"
-- name: samba | Assert that system manager is systemd
-  assert:
+- name: "samba | Assert that system manager is systemd"
+  ansible.builtin.assert:
     that:
-    - "hostvars[inventory_hostname]['ansible_service_mgr'] == 'systemd'"
+      - "hostvars[inventory_hostname]['ansible_service_mgr'] == 'systemd'"
     msg: "System manager is not systemd."
     quiet: "true"
-- name: samba | Create samba catalog
-  file:
+- name: "samba | Create samba catalog"
+  ansible.builtin.file:
     path: "{{ hostvars[inventory_hostname]['samba_smb_conf_dest'] }}"
     state: "directory"
     owner: "root"
     group: "root"
     mode: "0755"
-- name: samba | Create ctdb catalog
-  file:
+- name: "samba | Create ctdb catalog"
+  ansible.builtin.file:
     path: "/etc/ctdb"
     state: "directory"
     owner: "root"

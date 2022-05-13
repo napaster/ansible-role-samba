@@ -6,7 +6,7 @@ versions of Microsoft Windows operating systems.
 
 ## Requirements
 
-* Ansible 2.8+;
+* Ansible 3.0.0+;
 * Samba 4.8+;
 
 ## Example configuration

@@ -1,76 +1,76 @@
 ---
-- name: samba | Deploy Samba configuration
-  template:
+- name: "samba | Deploy Samba configuration"
+  ansible.builtin.template:
     src: "smb.j2"
-    dest: "{{ hostvars[inventory_hostname]['samba_smb_conf_dest'] + '/' +
-              'smb.conf' }}"
+    dest: "{{ hostvars[inventory_hostname]['samba_smb_conf_dest'] +
+      '/smb.conf' }}"
     owner: "root"
     group: "root"
     mode: "0644"
     validate: "testparm -s %s"
   when:
-  - "vars['samba_mode'] == 'standalone' or
-     (vars['samba_mode'] == 'cluster' and
-     vars['samba_ctdb_service_facts'] == 'running')"
+    - "vars['samba_mode'] == 'standalone' or
+       (vars['samba_mode'] == 'cluster' and
+       vars['samba_ctdb_service_facts'] == 'running')"
   notify:
-  - "Reload smb"
-  - "Reload nmb"
-  - "Reload winbind"
+    - "Reload smb"
+    - "Reload nmb"
+    - "Reload winbind"
 # CTDB socket is not started
-- name: samba | Deploy Samba CTDB configuration [without syntax validation]
-  template:
+- name: "samba | Deploy Samba CTDB configuration [without syntax validation]"
+  ansible.builtin.template:
     src: "smb.j2"
-    dest: "{{ hostvars[inventory_hostname]['samba_smb_conf_dest'] + '/' +
-              'smb.conf' }}"
+    dest: "{{ hostvars[inventory_hostname]['samba_smb_conf_dest'] +
+      '/smb.conf' }}"
     owner: "root"
     group: "root"
     mode: "0644"
   when:
-  - "vars['samba_mode'] == 'cluster'"
-  - "vars['samba_ctdb_service_facts'] != 'running'"
+    - "vars['samba_mode'] == 'cluster'"
+    - "vars['samba_ctdb_service_facts'] != 'running'"
   notify:
-  - "Reload smb"
-  - "Reload nmb"
-  - "Reload winbind"
-- name: samba | Enable smb service
-  systemd:
+    - "Reload smb"
+    - "Reload nmb"
+    - "Reload winbind"
+- name: "samba | Enable smb service"
+  ansible.builtin.systemd:
     name: "{{ hostvars[inventory_hostname]['samba_smb_service'] }}"
     enabled: "yes"
   when:
-  - "(hostvars[inventory_hostname]['samba'] is defined and
-      hostvars[inventory_hostname]['samba'] != '' and
-      hostvars[inventory_hostname]['samba'] |
-      json_query(vars['samba_smb_enable']) is defined and
-      hostvars[inventory_hostname]['samba'] |
-      json_query(vars['samba_smb_enable']) == 'true')"
-  - "vars['samba_mode'] == 'standalone'"
+    - "(hostvars[inventory_hostname]['samba'] is defined and
+        hostvars[inventory_hostname]['samba'] != '' and
+        hostvars[inventory_hostname]['samba'] |
+        community.general.json_query(vars['samba_smb_enable']) is defined and
+        hostvars[inventory_hostname]['samba'] |
+        community.general.json_query(vars['samba_smb_enable']) == 'true')"
+    - "vars['samba_mode'] == 'standalone'"
   vars:
     samba_smb_enable: "[] | map(&enable || 'false', @) | [0]"
-- name: samba | Enable nmb service
-  systemd:
+- name: "samba | Enable nmb service"
+  ansible.builtin.systemd:
     name: "{{ hostvars[inventory_hostname]['samba_nmb_service'] }}"
     enabled: "yes"
   when:
-  - "(hostvars[inventory_hostname]['samba'] is defined and
-      hostvars[inventory_hostname]['samba'] != '' and
-      hostvars[inventory_hostname]['samba'] |
-      json_query(vars['samba_nmb_enable']) is defined and
-      hostvars[inventory_hostname]['samba'] |
-      json_query(vars['samba_nmb_enable']) == 'true')"
-  - "vars['samba_mode'] == 'standalone'"
+    - "(hostvars[inventory_hostname]['samba'] is defined and
+        hostvars[inventory_hostname]['samba'] != '' and
+        hostvars[inventory_hostname]['samba'] |
+        community.general.json_query(vars['samba_nmb_enable']) is defined and
+        hostvars[inventory_hostname]['samba'] |
+        community.general.json_query(vars['samba_nmb_enable']) == 'true')"
+    - "vars['samba_mode'] == 'standalone'"
   vars:
     samba_nmb_enable: "[] | map(&enable || 'false', @) | [0]"
-- name: samba | Enable winbind service
-  systemd:
+- name: "samba | Enable winbind service"
+  ansible.builtin.systemd:
     name: "{{ hostvars[inventory_hostname]['samba_winbind_service'] }}"
     enabled: "yes"
   when:
-  - "(hostvars[inventory_hostname]['samba'] is defined and
-      hostvars[inventory_hostname]['samba'] != '' and
-      hostvars[inventory_hostname]['samba'] |
-      json_query(vars['samba_winbind_enable']) is defined and
-      hostvars[inventory_hostname]['samba'] |
-      json_query(vars['samba_winbind_enable']) == 'true')"
-  - "vars['samba_mode'] == 'standalone'"
+    - "(hostvars[inventory_hostname]['samba'] is defined and
+        hostvars[inventory_hostname]['samba'] != '' and
+        hostvars[inventory_hostname]['samba'] |
+        community.general.json_query(vars['samba_winbind_enable']) is defined
+        and hostvars[inventory_hostname]['samba'] |
+        community.general.json_query(vars['samba_winbind_enable']) == 'true')"
+    - "vars['samba_mode'] == 'standalone'"
   vars:
     samba_winbind_enable: "[] | map(&enable || 'false', @) | [0]"

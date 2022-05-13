@@ -228,7 +228,7 @@
 {{ '  delete share command = ' + g.delete_share_command }}
 {% endif %}
 {% if g.delete_user_from_group_script is defined and
-      g.delete_user_from_group_script != '' %}
+  g.delete_user_from_group_script != '' %}
 {{ '  delete user from group script = ' + g.delete_user_from_group_script }}
 {% endif %}
 {% if g.delete_user_script is defined and g.delete_user_script != '' %}
@@ -240,7 +240,8 @@
 {% if g.disable_netbios is defined and g.disable_netbios in ['yes', 'no'] %}
 {{ '  disable netbios = ' + g.disable_netbios }}
 {% endif %}
-{% if g.dns_forwarder is defined and g.dns_forwarder | ipaddr('host') %}
+{% if g.dns_forwarder is defined and g.dns_forwarder |
+  ansible.utils.ipaddr('host') %}
 {{ '  dns forwarder = ' + g.dns_forwarder }}
 {% endif %}
 {% if g.dns_proxy is defined and g.dns_proxy in ['yes', 'no'] %}

@@ -1,57 +1,57 @@
 ---
 - name: Reload smb
-  systemd:
+  ansible.builtin.systemd:
     name: "{{ hostvars[inventory_hostname]['samba_smb_service'] }}"
     state: "reloaded"
   when:
-  - "(hostvars[inventory_hostname]['samba'] is defined and
-      hostvars[inventory_hostname]['samba'] != '' and
-      hostvars[inventory_hostname]['samba'] |
-      json_query(vars['samba_smb_restart']) is defined and
-      hostvars[inventory_hostname]['samba'] |
-      json_query(vars['samba_smb_restart']) == 'true')"
-  - "vars['samba_ctdb_service_facts'] == 'running'"
+    - "(hostvars[inventory_hostname]['samba'] is defined and
+        hostvars[inventory_hostname]['samba'] != '' and
+        hostvars[inventory_hostname]['samba'] |
+        community.general.json_query(vars['samba_smb_restart']) is defined and
+        hostvars[inventory_hostname]['samba'] |
+        community.general.json_query(vars['samba_smb_restart']) == 'true')"
+    - "vars['samba_ctdb_service_facts'] == 'running'"
   vars:
     samba_smb_restart: "[] | map(&restart || 'false', @) | [0]"
 - name: Reload nmb
-  systemd:
+  ansible.builtin.systemd:
     name: "{{ hostvars[inventory_hostname]['samba_nmb_service'] }}"
     state: "reloaded"
   when:
-  - "(hostvars[inventory_hostname]['samba'] is defined and
-      hostvars[inventory_hostname]['samba'] != '' and
-      hostvars[inventory_hostname]['samba'] |
-      json_query(vars['samba_nmb_restart']) is defined and
-      hostvars[inventory_hostname]['samba'] |
-      json_query(vars['samba_nmb_restart']) == 'true')"
-  - "vars['samba_ctdb_service_facts'] == 'running'"
+    - "(hostvars[inventory_hostname]['samba'] is defined and
+        hostvars[inventory_hostname]['samba'] != '' and
+        hostvars[inventory_hostname]['samba'] |
+        community.general.json_query(vars['samba_nmb_restart']) is defined and
+        hostvars[inventory_hostname]['samba'] |
+        community.general.json_query(vars['samba_nmb_restart']) == 'true')"
+    - "vars['samba_ctdb_service_facts'] == 'running'"
   vars:
     samba_nmb_restart: "[] | map(&restart || 'false', @) | [0]"
 - name: Reload winbind
-  systemd:
+  ansible.builtin.systemd:
     name: "{{ hostvars[inventory_hostname]['samba_winbind_service'] }}"
     state: "reloaded"
   when:
-  - "(hostvars[inventory_hostname]['samba'] is defined and
-      hostvars[inventory_hostname]['samba'] != '' and
-      hostvars[inventory_hostname]['samba'] |
-      json_query(vars['samba_winbind_restart']) is defined and
-      hostvars[inventory_hostname]['samba'] |
-      json_query(vars['samba_winbind_restart']) == 'true')"
-  - "vars['samba_ctdb_service_facts'] == 'running'"
+    - "(hostvars[inventory_hostname]['samba'] is defined and
+        hostvars[inventory_hostname]['samba'] != '' and
+        hostvars[inventory_hostname]['samba'] |
+        community.general.json_query(vars['samba_winbind_restart']) is defined
+        and hostvars[inventory_hostname]['samba'] |
+        community.general.json_query(vars['samba_winbind_restart']) == 'true')"
+    - "vars['samba_ctdb_service_facts'] == 'running'"
   vars:
     samba_winbind_restart: "[] | map(&restart || 'false', @) | [0]"
 - name: Restart ctdb
-  systemd:
+  ansible.builtin.systemd:
     name: "{{ hostvars[inventory_hostname]['samba_ctdb_service'] }}"
     state: "restarted"
   when:
-  - "(hostvars[inventory_hostname]['samba'] is defined and
-      hostvars[inventory_hostname]['samba'] != '' and
-      hostvars[inventory_hostname]['samba'] |
-      json_query(vars['samba_ctdb_restart']) is defined and
-      hostvars[inventory_hostname]['samba'] |
-      json_query(vars['samba_ctdb_restart']) == 'true')"
-  - "vars['samba_mode'] == 'cluster'"
+    - "(hostvars[inventory_hostname]['samba'] is defined and
+        hostvars[inventory_hostname]['samba'] != '' and
+        hostvars[inventory_hostname]['samba'] |
+        community.general.json_query(vars['samba_ctdb_restart']) is defined and
+        hostvars[inventory_hostname]['samba'] |
+        community.general.json_query(vars['samba_ctdb_restart']) == 'true')"
+    - "vars['samba_mode'] == 'cluster'"
   vars:
     samba_ctdb_restart: "[] | map(&restart || 'false', @) | [0]"

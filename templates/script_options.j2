@@ -1,33 +1,33 @@
 {% for e in vars['samba_ctdb_script_options'] %}
 {% if e.ctdb_partially_online_interfaces is defined and
-      e.ctdb_partially_online_interfaces in ['true', 'false'] %}
+  e.ctdb_partially_online_interfaces in ['true', 'false'] %}
 {{ 'CTDB_PARTIALLY_ONLINE_INTERFACES=' + e.ctdb_partially_online_interfaces }}
 {% endif %}
 {% if e.ctdb_natgw_default_gateway is defined and
-      e.ctdb_natgw_default_gateway | ipaddr('host') %}
+  e.ctdb_natgw_default_gateway | ansible.utils.ipaddr('host') %}
 {{ 'CTDB_NATGW_DEFAULT_GATEWAY=' + e.ctdb_natgw_default_gateway }}
 {% endif %}
 {% if e.ctdb_natgw_private_network is defined and
-      e.ctdb_natgw_private_network | ipaddr('net') %}
+  e.ctdb_natgw_private_network | ansible.utils.ipaddr('net') %}
 {{ 'CTDB_NATGW_PRIVATE_NETWORK=' + e.ctdb_natgw_private_network }}
 {% endif %}
 {% if e.ctdb_natgw_public_iface is defined and
-      e.ctdb_natgw_public_iface != '' %}
+  e.ctdb_natgw_public_iface != '' %}
 {{ 'CTDB_NATGW_PUBLIC_IFACE=' + e.ctdb_natgw_public_iface }}
 {% endif %}
 {% if e.ctdb_natgw_public_ip is defined and
-      e.ctdb_natgw_public_ip | ipaddr('host/prefix') %}
+  e.ctdb_natgw_public_ip | ansible.utils.ipaddr('host/prefix') %}
 {{ 'CTDB_NATGW_PUBLIC_IP=' + e.ctdb_natgw_public_ip }}
 {% endif %}
 {% if e.ctdb_natgw_static_routes is defined and
-      e.ctdb_natgw_static_routes != '' %}
+  e.ctdb_natgw_static_routes != '' %}
 {% for ec in e.ctdb_natgw_static_routes %}
 {% if loop.first %}
 {{ 'CTDB_NATGW_STATIC_ROUTES=' -}}
 {% endif %}
-{% if ec.route is defined and ec.route | ipaddr('net') %}
+{% if ec.route is defined and ec.route | ansible.utils.ipaddr('net') %}
 {{ ec.route -}}
-{% if ec.gateway is defined and ec.gateway | ipaddr('host') %}
+{% if ec.gateway is defined and ec.gateway | ansible.utils.ipaddr('host') %}
 {{ '@' + ec.gateway -}}
 {% endif %}
 {% endif %}
@@ -39,11 +39,11 @@
 {% endfor %}
 {% endif %}
 {% if e.ctdb_lvs_public_iface is defined and
-      e.ctdb_lvs_public_iface != '' %}
+  e.ctdb_lvs_public_iface != '' %}
 {{ 'CTDB_LVS_PUBLIC_IFACE=' + e.ctdb_lvs_public_iface }}
 {% endif %}
 {% if e.ctdb_lvs_public_ip is defined and
-      e.ctdb_lvs_public_ip | ipaddr('host') %}
+  e.ctdb_lvs_public_ip | ansible.utils.ipaddr('host') %}
 {{ 'CTDB_LVS_PUBLIC_IP=' + e.ctdb_lvs_public_ip }}
 {% endif %}
 {% if e.ctdb_service_winbind is defined and e.ctdb_service_winbind != '' %}
@@ -53,7 +53,7 @@
 {{ 'CTDB_SAMBA_CHECK_PORTS=' + e.ctdb_samba_check_ports }}
 {% endif %}
 {% if e.ctdb_samba_skip_share_check is defined and
-      e.ctdb_samba_skip_share_check in ['yes', 'no'] %}
+  e.ctdb_samba_skip_share_check in ['yes', 'no'] %}
 {{ 'CTDB_SAMBA_SKIP_SHARE_CHECK=' + e.ctdb_samba_skip_share_check }}
 {% endif %}
 {% if e.ctdb_service_nmb is defined and e.ctdb_service_nmb != '' %}
@@ -69,14 +69,14 @@
 {{ 'CTDB_NFS_CHECKS_DIR=' + e.ctdb_nfs_checks_dir }}
 {% endif %}
 {% if e.ctdb_nfs_skip_share_check is defined and
-      e.ctdb_nfs_skip_share_check in ['yes', 'no'] %}
+  e.ctdb_nfs_skip_share_check in ['yes', 'no'] %}
 {{ 'CTDB_NFS_SKIP_SHARE_CHECK=' + e.ctdb_nfs_skip_share_check }}
 {% endif %}
 {% if e.ctdb_rpcinfo_localhost is defined and e.ctdb_rpcinfo_localhost != '' %}
 {{ 'CTDB_RPCINFO_LOCALHOST=' + e.ctdb_rpcinfo_localhost }}
 {% endif %}
 {% if e.ctdb_rpcinfo_localhost6 is defined and
-      e.ctdb_rpcinfo_localhost6 != '' %}
+  e.ctdb_rpcinfo_localhost6 != '' %}
 {{ 'CTDB_RPCINFO_LOCALHOST6=' + e.ctdb_rpcinfo_localhost6 }}
 {% endif %}
 {% if e.ctdb_nfs_state_fs_type is defined and e.ctdb_nfs_state_fs_type != '' %}
@@ -86,15 +86,15 @@
 {{ 'CTDB_NFS_STATE_MNT=' + e.ctdb_nfs_state_mnt }}
 {% endif %}
 {% if e.ctdb_start_iscsi_scriptst is defined and
-      e.ctdb_start_iscsi_scriptst != '' %}
+  e.ctdb_start_iscsi_scriptst != '' %}
 {{ 'CTDB_START_ISCSI_SCRIPTST=' + e.ctdb_start_iscsi_scriptst }}
 {% endif %}
 {% if e.ctdb_start_iscsi_scriptst is defined and
-      e.ctdb_start_iscsi_scriptst != '' %}
+  e.ctdb_start_iscsi_scriptst != '' %}
 {{ 'CTDB_START_ISCSI_SCRIPTST=' + e.ctdb_start_iscsi_scriptst }}
 {% endif %}
 {% if e.ctdb_max_corrupt_db_backups is defined and
-      e.ctdb_max_corrupt_db_backups != '' %}
+  e.ctdb_max_corrupt_db_backups != '' %}
 {{ 'CTDB_MAX_CORRUPT_DB_BACKUPS=' + e.ctdb_max_corrupt_db_backups }}
 {% endif %}
 {% endfor %}

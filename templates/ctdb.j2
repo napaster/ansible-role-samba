@@ -32,7 +32,8 @@
     hostvars[inventory_hostname]['samba_rados_mutex_path'] ~ ' ' ~ ccr.cluster ~
     ' client.' ~ ccr.client ~ ' ' ~ ccr.pool ~ ' ' ~ ccr.object }}
 {% endif %}
-{% if ccr.node_address is defined and ccr.node_address | ipaddr('host') %}
+{% if ccr.node_address is defined and ccr.node_address |
+  ansible.utils.ipaddr('host') %}
 {{ '  node address = ' + ccr.node_address }}
 {% endif %}
 {% if ccr.transport is defined and ccr.transport in ['tcp', 'ib'] %}
