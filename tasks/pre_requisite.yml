@@ -29,6 +29,12 @@
   when:
     - "vars['samba_package_state'] is defined"
     - "vars['samba_package_state'] != ''"
+- name: "samba | Set samba package state to present state from empty state"
+  ansible.builtin.set_fact:
+    samba_package_state: 'present'
+  when:
+    - "vars['samba_package_state'] is defined"
+    - "vars['samba_package_state'] == ''"
 - name: "samba | Assert samba mode"
   ansible.builtin.assert:
     that:
