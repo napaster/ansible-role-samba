@@ -13,7 +13,7 @@
 {% if s.shadow_sort is defined and s.shadow_sort in ['asc', 'desc', 'none'] %}
 {{ '  shadow: sort = ' + s.shadow_sort }}
 {% endif %}
-{% if s.shadow_localtime is defined and s.shadow_localtime ['yes', 'no'] %}
+{% if s.shadow_localtime is defined and s.shadow_localtime in ['yes', 'no'] %}
 {{ '  shadow: localtime = ' + s.shadow_localtime }}
 {% endif %}
 {% if s.shadow_format is defined and s.shadow_format != '' %}
