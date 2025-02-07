@@ -1,0 +1,47 @@
+---
+default:
+  tags:
+    - 'k8s'
+
+include:
+  - project: 'infra/gitlab-ci-lib'
+    ref: 'main'
+    file:
+      - 'modules/jira.yml'
+      - 'modules/yamllint.yml'
+      - 'modules/ansible-lint.yml'
+
+stages:
+  - 'test'
+  - 'lint'
+
+.lint_rules:
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+      changes:
+        - '**/*.{yml,yaml,j2}'
+        - '.ansible-lint'
+        - '.yamllint'
+
+jira_check:
+  stage: 'test'
+  extends:
+    - '.jira_check'
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+
+
+yamllint:
+  stage: 'lint'
+  extends:
+    - '.yamllint'
+  rules:
+    - !reference [.lint_rules, rules]
+
+
+ansible-lint:
+  stage: 'lint'
+  extends:
+    - '.ansible-lint'
+  rules:
+    - !reference [.lint_rules, rules]
