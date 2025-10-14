@@ -1,23 +1,23 @@
-{{ '## ' + 'smb.conf' }}
+{{ '## smb.conf' }}
 {{ '# ' + ansible_managed }}
-{{ '# ' + 'Do not edit manually' }}
+{{ '# Do not edit manually' }}
 
 {% if vars['samba_smb_global_settings'] is defined and
-      vars['samba_smb_global_settings'] != '' %}
+  vars['samba_smb_global_settings'] not in ['', [], None] %}
 {% for g in vars['samba_smb_global_settings'] %}
 {% include 'smb_global.j2' %}
 {% endfor %}
 {% endif %}
 {% if vars['samba_smb_shares_settings'] is defined and
-      vars['samba_smb_shares_settings'] != '' %}
+  vars['samba_smb_shares_settings'] not in ['', [], None] %}
 {% for s in vars['samba_smb_shares_settings'] %}
-{{ '[' ~ s.name ~ ']' }}
+{{ '[' ~ s['name'] ~ ']' }}
 {% include 'smb_share.j2' %}
-{% include 'smb_vfs_acl_xattr.j2' %}
-{% include 'smb_vfs_recycle.j2' %}
-{% include 'smb_vfs_full_audit.j2' %}
-{% include 'smb_vfs_shadow_copy2.j2' %}
-{% include 'smb_vfs_ceph.j2' %}
-{% include 'smb_vfs_ceph_snapshots.j2' %}
+{% include 'vfs.d/acl_xattr.j2' %}
+{% include 'vfs.d/recycle.j2' %}
+{% include 'vfs.d/full_audit.j2' %}
+{% include 'vfs.d/shadow_copy2.j2' %}
+{% include 'vfs.d/ceph.j2' %}
+{% include 'vfs.d/ceph_snapshots.j2' %}
 {% endfor %}
 {% endif %}

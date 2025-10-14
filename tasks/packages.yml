@@ -1,33 +1,34 @@
 ---
 - name: "samba | Install the required packages in Redhat derivatives"
-  block:
-  - name: "samba | Install the required packages for RedHat via yum"
-    ansible.builtin.yum:
-      name: "{{ hostvars[inventory_hostname]['samba_package'] }}"
-      state: "{{ vars['samba_package_state'] | default(omit) }}"
-      update_cache: "yes"
-    when:
-      - "hostvars[inventory_hostname]['ansible_pkg_mgr'] == 'yum'"
-  - name: "samba | Install the required packages for RedHat via dnf"
-    ansible.builtin.dnf:
-      name: "{{ hostvars[inventory_hostname]['samba_package'] }}"
-      state: "{{ vars['samba_package_state'] | default(omit) }}"
-      update_cache: "yes"
-    when:
-      - "hostvars[inventory_hostname]['ansible_pkg_mgr'] == 'dnf'"
   when:
     - "hostvars[inventory_hostname]['ansible_os_family'] == 'RedHat'"
+  block:
+    - name: "samba | Update dnf cache"
+      ansible.builtin.dnf:
+        update_cache: "yes"
+    - name: "samba | Install package with dnf"
+      ansible.builtin.dnf:
+        name: "{{ hostvars[inventory_hostname]['samba_package'] }}"
+        state: "{{ vars['samba_package_state'] | default(omit) }}"
 - name: "samba | Install the required packages in Debian derivatives"
-  ansible.builtin.apt:
-    name: "{{ hostvars[inventory_hostname]['samba_package'] }}"
-    state: "{{ vars['samba_package_state'] | default(omit) }}"
-    update_cache: "yes"
   when:
     - "hostvars[inventory_hostname]['ansible_os_family'] == 'Debian'"
+  block:
+    - name: "samba | Update apt cache"
+      ansible.builtin.apt:
+        update_cache: "yes"
+    - name: "samba | Install package with apt"
+      ansible.builtin.apt:
+        name: "{{ hostvars[inventory_hostname]['samba_package'] }}"
+        state: "{{ vars['samba_package_state'] | default(omit) }}"
 - name: "samba | Install the required packages in ArchLinux derivatives"
-  community.general.pacman:
-    name: "{{ hostvars[inventory_hostname]['samba_package'] }}"
-    state: "{{ vars['samba_package_state'] | default(omit) }}"
-    update_cache: "yes"
   when:
     - "hostvars[inventory_hostname]['ansible_os_family'] == 'Archlinux'"
+  block:
+    - name: "samba | Update pacman cache"
+      community.general.pacman:
+        update_cache: "yes"
+    - name: "samba | Install package with pacman"
+      community.general.pacman:
+        name: "{{ hostvars[inventory_hostname]['samba_package'] }}"
+        state: "{{ vars['samba_package_state'] | default(omit) }}"

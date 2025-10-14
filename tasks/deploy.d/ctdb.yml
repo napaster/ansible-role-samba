@@ -11,7 +11,7 @@
     - "Restart ctdb"
   when:
     - "vars['samba_ctdb_settings'] is defined"
-    - "vars['samba_ctdb_settings'] != []"
+    - "vars['samba_ctdb_settings'] not in ['', [], None]"
 - name: "samba | Deploy CTDB nodes"
   ansible.builtin.template:
     src: "nodes.j2"
@@ -24,7 +24,7 @@
     - "Restart ctdb"
   when:
     - "vars['samba_ctdb_private_address'] is defined"
-    - "vars['samba_ctdb_private_address'] != []"
+    - "vars['samba_ctdb_private_address'] not in ['', [], None]"
 - name: "samba | Deploy CTDB public addresses"
   ansible.builtin.template:
     src: "public_addresses.j2"
@@ -37,7 +37,7 @@
     - "Restart ctdb"
   when:
     - "vars['samba_ctdb_public_address'] is defined"
-    - "vars['samba_ctdb_public_address'] != []"
+    - "vars['samba_ctdb_public_address'] not in ['', [], None]"
 - name: "samba | Deploy CTDB script options"
   ansible.builtin.template:
     src: "script_options.j2"
@@ -50,7 +50,7 @@
     - "Restart ctdb"
   when:
     - "vars['samba_ctdb_script_options'] is defined"
-    - "vars['samba_ctdb_script_options'] != []"
+    - "vars['samba_ctdb_script_options'] not in ['', [], None]"
 - name: "samba | Enable ctdb service"
   ansible.builtin.systemd:
     name: "{{ hostvars[inventory_hostname]['samba_ctdb_service'] }}"

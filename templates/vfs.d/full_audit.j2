@@ -1,0 +1,28 @@
+{% if s['full_audit_prefix'] is defined and
+  s['full_audit_prefix'] not in ['', [], None] %}
+{{ '  full_audit: prefix = ' + s['full_audit_prefix'] }}
+{% endif %}
+{% if s['full_audit_success'] is defined and
+  s['full_audit_success'] not in ['', [], None] %}
+{{ '  full_audit: success = ' + s['full_audit_success'] }}
+{% endif %}
+{% if s['full_audit_failure'] is defined and
+  s['full_audit_failure'] not in ['', [], None] %}
+{{ '  full_audit: failure = ' + s['full_audit_failure'] }}
+{% endif %}
+{% if s['full_audit_facility'] is defined and
+  s['full_audit_facility'] not in ['', [], None] %}
+{{ '  full_audit: facility = ' + s['full_audit_facility'] }}
+{% endif %}
+{% if s['full_audit_priority'] is defined and
+  s['full_audit_priority'] not in ['', [], None] %}
+{{ '  full_audit: priority = ' + s['full_audit_priority'] }}
+{% endif %}
+{% if s['full_audit_syslog'] is defined and
+  s['full_audit_syslog'] in ['true', 'false'] %}
+{{ '  full_audit: syslog = ' + s['full_audit_syslog'] }}
+{% endif %}
+{% if s['full_audit_log_secdesc'] is defined and
+  s['full_audit_log_secdesc'] in ['true', 'false'] %}
+{{ '  full_audit: log_secdesc = ' + s['full_audit_log_secdesc'] }}
+{% endif %}

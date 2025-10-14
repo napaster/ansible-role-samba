@@ -1,4 +1,10 @@
 ---
+- name: "systemd | Assert that system manager is systemd"
+  ansible.builtin.assert:
+    that:
+      - "hostvars[inventory_hostname]['ansible_service_mgr'] == 'systemd'"
+    fail_msg: "System manager is not systemd"
+    quiet: "true"
 - name: "samba | Add the OS specific variables"
   ansible.builtin.include_vars:
     file: "{{ hostvars[inventory_hostname]['ansible_os_family'] + '.yml' }}"
@@ -20,33 +26,32 @@
       community.general.json_query('[].ctdb[].public_address[]') }}"
     samba_ctdb_script_options: "{{ hostvars[inventory_hostname]['samba'] |
       community.general.json_query('[].ctdb[].script_options[]') }}"
+  when:
+    - "hostvars[inventory_hostname]['samba'] is defined"
+    - "hostvars[inventory_hostname]['samba'] not in ['', [], None]"
 - name: "samba | Assert that package state in valid value"
   ansible.builtin.assert:
     that:
       - "vars['samba_package_state'] in ['present', 'latest']"
-    msg: "'package_state' must be in 'present' or 'latest'."
+    fail_msg: "'package_state' must be in 'present' or 'latest'"
     quiet: "true"
   when:
     - "vars['samba_package_state'] is defined"
-    - "vars['samba_package_state'] != ''"
-- name: "samba | Set samba package state to present state from empty state"
+    - "vars['samba_package_state'] not in ['', [], None]"
+- name: "samba | Set package state to 'present' cause value is not defined"
   ansible.builtin.set_fact:
-    samba_package_state: 'present'
+    samba_package_state: "present"
   when:
     - "vars['samba_package_state'] is defined"
-    - "vars['samba_package_state'] == ''"
-- name: "samba | Assert samba mode"
+    - "(vars['samba_package_state'] == '' or
+      vars['samba_package_state'] == None)"
+- name: "samba | Assert samba mode in supported value"
   ansible.builtin.assert:
     that:
       - "vars['samba_mode'] is defined"
       - "vars['samba_mode'] in ['standalone', 'cluster']"
-    msg: "Samba mode not in ['standalone', 'cluster'] or not defined."
-    quiet: "true"
-- name: "samba | Assert that system manager is systemd"
-  ansible.builtin.assert:
-    that:
-      - "hostvars[inventory_hostname]['ansible_service_mgr'] == 'systemd'"
-    msg: "System manager is not systemd."
+    fail_msg: "Samba mode not in ['standalone', 'cluster'] or not defined"
+    success_msg: "{{ 'Samba mode is: ' + vars['samba_mode'] }}"
     quiet: "true"
 - name: "samba | Create samba catalog"
   ansible.builtin.file:

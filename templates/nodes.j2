@@ -1,5 +1,5 @@
 {% for addr in vars['samba_ctdb_private_address'] %}
-{% if addr | ansible.utils.ipaddr('host') %}
+{% if (addr | ansible.utils.ipaddr('host')) %}
 {{ addr }}
 {% endif %}
 {% endfor %}
