@@ -1,0 +1,8 @@
+{% if s['ceph_config_file'] is defined and
+  s['ceph_config_file'] not in ['', [], None] %}
+{{ '  ceph: config_file = ' + s['ceph_config_file'] }}
+{% endif %}
+{% if s['ceph_user_id'] is defined and
+  s['ceph_user_id'] not in ['', [], None] %}
+{{ '  ceph: user_id = ' + s['ceph_user_id'] }}
+{% endif %}

@@ -1,0 +1,51 @@
+{% if s['shadow_mountpoint'] is defined and
+  s['shadow_mountpoint'] not in ['', [], None] %}
+{{ '  shadow: mountpoint = ' + s['shadow_mountpoint'] }}
+{% endif %}
+{% if s['shadow_snapdir'] is defined and
+  s['shadow_snapdir'] not in ['', [], None] %}
+{{ '  shadow: snapdir = ' + s['shadow_snapdir'] }}
+{% endif %}
+{% if s['shadow_basedir'] is defined and
+  s['shadow_basedir'] not in ['', [], None] %}
+{{ '  shadow: basedir = ' + s['shadow_basedir'] }}
+{% endif %}
+{% if s['shadow_snapsharepath'] is defined and
+  s['shadow_snapsharepath'] not in ['', [], None] %}
+{{ '  shadow: snapsharepath = ' + s['shadow_snapsharepath'] }}
+{% endif %}
+{% if s['shadow_sort'] is defined and
+  s['shadow_sort'] in ['asc', 'desc', 'none'] %}
+{{ '  shadow: sort = ' + s['shadow_sort'] }}
+{% endif %}
+{% if s['shadow_localtime'] is defined and
+  s['shadow_localtime'] in ['yes', 'no'] %}
+{{ '  shadow: localtime = ' + s['shadow_localtime'] }}
+{% endif %}
+{% if s['shadow_format'] is defined and
+  s['shadow_format'] not in ['', [], None] %}
+{{ '  shadow: format = ' + s['shadow_format'] }}
+{% endif %}
+{% if s['shadow_sscanf'] is defined and s['shadow_sscanf'] in ['yes', 'no'] %}
+{{ '  shadow: sscanf = ' + s['shadow_sscanf'] }}
+{% endif %}
+{% if s['shadow_fixinodes'] is defined and
+  s['shadow_fixinodes'] in ['yes', 'no'] %}
+{{ '  shadow: fixinodes = ' + s['shadow_fixinodes'] }}
+{% endif %}
+{% if s['shadow_snapdirseverywhere'] is defined and
+  s['shadow_snapdirseverywhere'] in ['yes', 'no'] %}
+{{ '  shadow: snapdirseverywhere = ' + s['shadow_snapdirseverywhere'] }}
+{% endif %}
+{% if s['shadow_crossmountpoints'] is defined and
+  s['shadow_crossmountpoints'] in ['yes', 'no'] %}
+{{ '  shadow: crossmountpoints = ' + s['shadow_crossmountpoints'] }}
+{% endif %}
+{% if s['shadow_snapprefix'] is defined and
+  s['shadow_snapprefix'] not in ['', [], None] %}
+{{ '  shadow: snapprefix = ' + s['shadow_snapprefix'] }}
+{% endif %}
+{% if s['shadow_delimiter'] is defined and
+  s['shadow_delimiter'] not in ['', [], None] %}
+{{ '  shadow: delimiter = ' + s['shadow_delimiter'] }}
+{% endif %}

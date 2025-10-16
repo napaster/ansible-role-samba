@@ -1,0 +1,8 @@
+{% if s['acl_xattr_ignore_system_acls'] is defined and
+  s['acl_xattr_ignore_system_acls'] in ['yes', 'no'] %}
+{{ '  acl_xattr: ignore system acls = ' + s['acl_xattr_ignore_system_acls'] }}
+{% endif %}
+{% if s['acl_xattr_default_acl_style'] is defined and
+  s['acl_xattr_default_acl_style'] in ['posix', 'windows', 'everyone'] %}
+{{ '  acl_xattr: default acl style = ' + s['acl_xattr_default_acl_style'] }}
+{% endif %}

@@ -1,16 +1,12 @@
 ---
 - name: "samba | Gather services facts"
-  service_facts:
+  ansible.builtin.service_facts:
 - name: "samba | Set facts about ctdb service"
   ansible.builtin.set_fact:
     samba_ctdb_service_facts:
       "{{ hostvars[inventory_hostname]['services']['ctdb.service']['state'] }}"
-  ignore_errors: "true"
-- name: "samba | Assert that ctdb service is present in service_facts
-    collection"
-  ansible.builtin.assert:
-    that:
-      - "vars['samba_ctdb_service_facts'] is defined"
-      - "vars['samba_ctdb_service_facts'] != []"
-    msg: "Can't fetch state of ctdb service. Doesn't exist?"
-    quiet: "true"
+  failed_when:
+    - "hostvars[inventory_hostname]['services']['ctdb.service']['state'] is
+      defined"
+    - "hostvars[inventory_hostname]['services']['ctdb.service']['state'] in
+      ['', [], None]"

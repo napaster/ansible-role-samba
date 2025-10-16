@@ -1,7 +1,9 @@
 ---
-- ansible.builtin.import_tasks:
+- name: "samba | Include pre requisite tasks"
+  ansible.builtin.import_tasks:
     file: "pre_requisite.yml"
-- ansible.builtin.include_tasks:
+- name: "samba | Include packages tasks"
+  ansible.builtin.include_tasks:
     file: "packages.yml"
   when:
     - "hostvars[inventory_hostname]['samba'] is defined"
@@ -12,13 +14,16 @@
        community.general.json_query(vars['samba_install_package']) == 'true'"
   vars:
     samba_install_package: "[] | map(&install_package || 'false', @) | [0]"
-- ansible.builtin.include_tasks:
+- name: "samba | Include ctdb pre requisite tasks"
+  ansible.builtin.include_tasks:
     file: "ctdb_prereq.yml"
   when:
     - "vars['samba_mode'] == 'cluster'"
-- ansible.builtin.import_tasks:
-    file: "deploy_samba.yml"
-- ansible.builtin.include_tasks:
-    file: "deploy_ctdb.yml"
+- name: "samba | Include samba deployment tasks"
+  ansible.builtin.import_tasks:
+    file: "deploy.d/samba.yml"
+- name: "samba | Include ctdb deployment tasks"
+  ansible.builtin.include_tasks:
+    file: "deploy.d/ctdb.yml"
   when:
     - "vars['samba_mode'] == 'cluster'"
