@@ -4459,3 +4459,36 @@ samba:
 # set. Default is '_GMT'.
       shadow_delimiter: ''
 ```
+
+## Standalone mode
+
+The role was written cluster-first and a few things assumed CTDB was present.
+Fixed here; the knobs below default to the previous behaviour, so existing
+cluster hosts are unaffected.
+
+| Variable | Default | Purpose |
+|---|---|---|
+| `samba_ctdb_service_facts` | `''` | Now defined in defaults. `tasks/ctdb_prereq.yml` runs only when `mode: cluster`, so in standalone the three reload handlers used to evaluate an undefined variable and the play died with `object of type 'dict' has no attribute 'samba_ctdb_service_facts'` the moment smb.conf changed. |
+| `samba_manage_nmb` | `true` | Set to `false` on a host that does not run `nmb`. |
+| `samba_manage_winbind` | `true` | Set to `false` on a host that does not run `winbind`. |
+
+The reload handlers now require the CTDB service to be running only in cluster
+mode; in standalone they simply reload. Without that, standalone could never
+reload smb after a config change even if the crash were patched.
+
+Why the per-service switches matter: `enable` and `restart` inside `samba`
+apply to smb, nmb and winbind together. On a host running only smb and nmb,
+the role would enable winbind, and `ansible.builtin.systemd` with
+`state: reloaded` **starts an inactive unit** — so a reload handler would have
+switched winbind on. Set `samba_manage_winbind: false` and neither happens.
+
+`/etc/ctdb` is created only in cluster mode now; standalone hosts no longer get
+an empty directory for a package they do not have installed.
+
+```yaml
+samba_manage_winbind: false
+samba:
+  - enable: 'true'
+    restart: 'true'
+    mode: 'standalone'
+```

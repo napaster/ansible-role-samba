@@ -10,7 +10,8 @@
         community.general.json_query(vars['samba_smb_restart']) is defined and
         hostvars[inventory_hostname]['samba'] |
         community.general.json_query(vars['samba_smb_restart']) == 'true')"
-    - "vars['samba_ctdb_service_facts'] == 'running'"
+    - "vars['samba_mode'] != 'cluster' or
+       vars['samba_ctdb_service_facts'] == 'running'"
   vars:
     samba_smb_restart: "[] | map(&restart || 'false', @) | [0]"
 - name: "Reload nmb"
@@ -24,7 +25,9 @@
         community.general.json_query(vars['samba_nmb_restart']) is defined and
         hostvars[inventory_hostname]['samba'] |
         community.general.json_query(vars['samba_nmb_restart']) == 'true')"
-    - "vars['samba_ctdb_service_facts'] == 'running'"
+    - "vars['samba_mode'] != 'cluster' or
+       vars['samba_ctdb_service_facts'] == 'running'"
+    - "vars['samba_manage_nmb'] | bool"
   vars:
     samba_nmb_restart: "[] | map(&restart || 'false', @) | [0]"
 - name: "Reload winbind"
@@ -38,7 +41,9 @@
         community.general.json_query(vars['samba_winbind_restart']) is defined
         and hostvars[inventory_hostname]['samba'] |
         community.general.json_query(vars['samba_winbind_restart']) == 'true')"
-    - "vars['samba_ctdb_service_facts'] == 'running'"
+    - "vars['samba_mode'] != 'cluster' or
+       vars['samba_ctdb_service_facts'] == 'running'"
+    - "vars['samba_manage_winbind'] | bool"
   vars:
     samba_winbind_restart: "[] | map(&restart || 'false', @) | [0]"
 - name: "Restart ctdb"

@@ -1,2 +1,12 @@
 ---
 samba: []
+
+# Defined here so standalone runs never touch an undefined variable. In
+# cluster mode tasks/ctdb_prereq.yml overrides it with the real service state.
+samba_ctdb_service_facts: ''
+
+# Per-service switches. The `enable`/`restart` keys inside `samba` apply to
+# smb, nmb and winbind together; these let a host opt out of the ones it does
+# not run. Defaults keep the previous behaviour.
+samba_manage_nmb: true
+samba_manage_winbind: true

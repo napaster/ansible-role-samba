@@ -58,6 +58,7 @@
         hostvars[inventory_hostname]['samba'] |
         community.general.json_query(vars['samba_nmb_enable']) == 'true')"
     - "vars['samba_mode'] == 'standalone'"
+    - "vars['samba_manage_nmb'] | bool"
   vars:
     samba_nmb_enable: "[] | map(&enable || 'false', @) | [0]"
 - name: "samba | Enable winbind service"
@@ -72,5 +73,6 @@
         and hostvars[inventory_hostname]['samba'] |
         community.general.json_query(vars['samba_winbind_enable']) == 'true')"
     - "vars['samba_mode'] == 'standalone'"
+    - "vars['samba_manage_winbind'] | bool"
   vars:
     samba_winbind_enable: "[] | map(&enable || 'false', @) | [0]"
