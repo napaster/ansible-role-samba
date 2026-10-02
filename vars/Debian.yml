@@ -1,0 +1,9 @@
+---
+samba_smb_service: 'smbd'
+samba_nmb_service: 'nmbd'
+samba_winbind_service: 'winbind'
+samba_ctdb_service: 'ctdb'
+samba_package: 'samba'
+samba_rados_mutex_path: '/usr/libexec/ctdb/ctdb_mutex_ceph_rados_helper'
+samba_smb_conf_dest: '/etc/samba'
+samba_ctdb_conf_dest: '/etc/ctdb'
